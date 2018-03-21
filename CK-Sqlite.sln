@@ -1,0 +1,64 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2011
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{67EF8FA0-3642-4EE4-AF94-8B1D66FBCC32}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitignore = .gitignore
+		appveyor.yml = appveyor.yml
+		nuget.config = nuget.config
+		RepositoryInfo.xml = RepositoryInfo.xml
+		Common\Shared.props = Common\Shared.props
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CK.Sqlite.Setup.Model", "CK.Sqlite.Setup.Model\CK.Sqlite.Setup.Model.csproj", "{5758A3C9-3259-4A5C-8201-8EB679C8F766}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CK.Sqlite.Setup.Runtime", "CK.Sqlite.Setup.Runtime\CK.Sqlite.Setup.Runtime.csproj", "{5223BB58-9460-475D-9FE4-8A23186B688B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{E41EE025-81BA-44EC-899A-4B0E1D2190DB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CK.Sqlite.Tests", "Tests\CK.Sqlite.Tests\CK.Sqlite.Tests.csproj", "{87995CBF-EFC2-464E-8BD6-E2977E8FC496}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CK.Testing.SqliteDBSetup", "CK.Testing.SqliteDBSetup\CK.Testing.SqliteDBSetup.csproj", "{FCEB7538-F58F-41DA-9CAB-2C5ADA893F91}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeCakeBuilder", "CodeCakeBuilder\CodeCakeBuilder.csproj", "{ACD6DB7B-FF50-41B5-B107-0A3AE23E66A5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5758A3C9-3259-4A5C-8201-8EB679C8F766}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5758A3C9-3259-4A5C-8201-8EB679C8F766}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5758A3C9-3259-4A5C-8201-8EB679C8F766}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5758A3C9-3259-4A5C-8201-8EB679C8F766}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5223BB58-9460-475D-9FE4-8A23186B688B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5223BB58-9460-475D-9FE4-8A23186B688B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5223BB58-9460-475D-9FE4-8A23186B688B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5223BB58-9460-475D-9FE4-8A23186B688B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87995CBF-EFC2-464E-8BD6-E2977E8FC496}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87995CBF-EFC2-464E-8BD6-E2977E8FC496}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87995CBF-EFC2-464E-8BD6-E2977E8FC496}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87995CBF-EFC2-464E-8BD6-E2977E8FC496}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FCEB7538-F58F-41DA-9CAB-2C5ADA893F91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCEB7538-F58F-41DA-9CAB-2C5ADA893F91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCEB7538-F58F-41DA-9CAB-2C5ADA893F91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCEB7538-F58F-41DA-9CAB-2C5ADA893F91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACD6DB7B-FF50-41B5-B107-0A3AE23E66A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACD6DB7B-FF50-41B5-B107-0A3AE23E66A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACD6DB7B-FF50-41B5-B107-0A3AE23E66A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACD6DB7B-FF50-41B5-B107-0A3AE23E66A5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{87995CBF-EFC2-464E-8BD6-E2977E8FC496} = {E41EE025-81BA-44EC-899A-4B0E1D2190DB}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {40F56495-1F4F-4279-9A6D-6098152768FD}
+	EndGlobalSection
+EndGlobal
