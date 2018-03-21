@@ -114,6 +114,7 @@ namespace CodeCake
                 .Does( () =>
                  {
                      StandardSolutionBuild( solutionFileName, gitInfo, configuration );
+                     // It has to be published here to inject the Version information.
                      componentProjects = new ComponentProjects( configuration );
                      foreach( var pub in componentProjects.ComponentProjectPaths.Where( p => p.EndsWith( "netcoreapp2.0" ) ) )
                      {
