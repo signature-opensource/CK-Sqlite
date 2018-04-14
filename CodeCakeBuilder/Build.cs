@@ -56,7 +56,7 @@ namespace CodeCake
             string pathToFramework = System.IO.Path.GetFullPath( name + "/bin/" + configuration + "/netstandard2.0" );
             if( !Directory.Exists( pathToFramework ) )
             {
-                pathToFramework = System.IO.Path.GetFullPath( name + "/bin/" + configuration + "/netcoreapp2.0" );
+                pathToFramework = System.IO.Path.GetFullPath( name + "/bin/" + configuration + "/netcoreapp2.0/publish" );
             }
             return pathToFramework;
         }
@@ -88,19 +88,23 @@ namespace CodeCake
             // since we rely on them to find the target...
             ComponentProjects componentProjects = null;
 
+            // The SimpleRepositoryInfo should be computed once and only once.
             SimpleRepositoryInfo gitInfo = Cake.GetSimpleRepositoryInfo();
-
-            // Configuration is either "Debug" or "Release".
-            string configuration = "Debug";
+            // This default global info will be replaced by Check-Repository task.
+            // It is allocated here to ease debugging and/or manual work on complex build script.
+            CheckRepositoryInfo globalInfo = new CheckRepositoryInfo { Version = gitInfo.SafeNuGetVersion };
 
             Task( "Check-Repository" )
                 .Does( () =>
-                 {
-                     configuration = StandardCheckRepository( projectsToPublish, gitInfo );
-                 } );
+                {
+                    globalInfo = StandardCheckRepository( projectsToPublish, gitInfo );
+                    if( globalInfo.ShouldStop )
+                    {
+                        Cake.TerminateWithSuccess( "All packages from this commit are already available. Build skipped." );
+                    }
+                } );
 
             Task( "Clean" )
-                .IsDependentOn( "Check-Repository" )
                 .Does( () =>
                  {
                      Cake.CleanDirectories( projects.Select( p => p.Path.GetDirectory().Combine( "bin" ) ) );
@@ -113,27 +117,27 @@ namespace CodeCake
                 .IsDependentOn( "Clean" )
                 .Does( () =>
                  {
-                     StandardSolutionBuild( solutionFileName, gitInfo, configuration );
+                     StandardSolutionBuild( solutionFileName, gitInfo, globalInfo.BuildConfiguration );
                      // It has to be published here to inject the Version information.
-                     componentProjects = new ComponentProjects( configuration );
-                     foreach( var pub in componentProjects.ComponentProjectPaths.Where( p => p.EndsWith( "netcoreapp2.0" ) ) )
+                     componentProjects = new ComponentProjects( globalInfo.BuildConfiguration );
+                     foreach( var pub in componentProjects.ComponentProjectPaths.Where( p => p.LastPart == "publish" ) )
                      {
-                         Cake.DotNetCorePublish( pub.RemoveLastPart().RemoveLastPart().RemoveLastPart(),
+                         Cake.DotNetCorePublish( pub.RemoveLastPart( 4 ),
                             new DotNetCorePublishSettings().AddVersionArguments( gitInfo, s =>
                             {
                                 s.Framework = "netcoreapp2.0";
-                                s.Configuration = configuration;
+                                s.Configuration = globalInfo.BuildConfiguration;
                             } ) );
                      }
                  } );
 
             Task( "Unit-Testing" )
                 .IsDependentOn( "Build" )
-                .WithCriteria( () => !Cake.IsInteractiveMode()
+                .WithCriteria( () => Cake.InteractiveMode() == InteractiveMode.NoInteraction
                                      || Cake.ReadInteractiveOption( "Run Unit Tests?", 'Y', 'N' ) == 'Y' )
                 .Does( () =>
                  {
-                     StandardUnitTests( configuration, projects.Where( p => p.Name.EndsWith( ".Tests" ) ) );
+                     StandardUnitTests( globalInfo.BuildConfiguration, projects.Where( p => p.Name.EndsWith( ".Tests" ) ) );
                  } );
 
             Task( "Create-All-NuGet-Packages" )
@@ -141,7 +145,7 @@ namespace CodeCake
                 .IsDependentOn( "Unit-Testing" )
                 .Does( () =>
                  {
-                     StandardCreateNuGetPackages( releasesDir, projectsToPublish, gitInfo, configuration );
+                     StandardCreateNuGetPackages( releasesDir, projectsToPublish, gitInfo, globalInfo.BuildConfiguration );
                  } );
 
             Task( "Push-Runtimes-and-Engines" )
@@ -149,19 +153,30 @@ namespace CodeCake
                 .WithCriteria( () => gitInfo.IsValid )
                 .Does( () =>
                 {
-                    var apiKey = Cake.InteractiveEnvironmentVariable( "CKSETUPREMOTESTORE_PUSH_API_KEY" );
-                    if( !String.IsNullOrWhiteSpace( apiKey ) )
+                    var components = componentProjects.ComponentProjectPaths.Select( x => x.ToString() );
+
+                    var storeConf = Cake.CKSetupCreateDefaultConfiguration();
+                    if( !storeConf.IsValid )
                     {
-                        if( !Cake.CKSetupPublishAndAddComponentFoldersToStore( componentProjects.ComponentProjectPaths.Select( x => x.ToString() ) ) )
+                        if( globalInfo.LocalFeedPath != null && globalInfo.LocalFeedPath.EndsWith( "LocalFeed\\Blank" ) )
                         {
-                            Cake.TerminateWithError( "Error while registering components." );
+                            storeConf.TargetStoreUrl = System.IO.Path.Combine( globalInfo.LocalFeedPath, "CKSetupStore" );
                         }
-                        if( !Cake.CKSetupPushLocalStoreToRemote( apiKey ) )
+                        else
                         {
-                            Cake.TerminateWithError( "Error while pushing components to remote store." );
+                            Cake.Information( "CKSetupStoreConfiguration is invalid. Skipped push to remote store." );
+                            return;
                         }
                     }
-                    else Cake.Information( "Skipped push to https://cksetup.invenietis.net." );
+                    Cake.Information( $"Using CKSetupStoreConfiguration: {storeConf}" );
+                    if( !Cake.CKSetupAddComponentFoldersToStore( storeConf, components ) )
+                    {
+                        Cake.TerminateWithError( "Error while registering components in local temporary store." );
+                    }
+                    if( !Cake.CKSetupPushLocalToRemoteStore( storeConf ) )
+                    {
+                        Cake.TerminateWithError( "Error while pushing components to remote store." );
+                    }
                 } );
 
             Task( "Push-NuGet-Packages" )
@@ -169,8 +184,7 @@ namespace CodeCake
                 .WithCriteria( () => gitInfo.IsValid )
                 .Does( () =>
                  {
-                     IEnumerable<FilePath> nugetPackages = Cake.GetFiles( releasesDir.Path + "/*.nupkg" );
-                     StandardPushNuGetPackages( nugetPackages, gitInfo );
+                     StandardPushNuGetPackages( globalInfo, releasesDir );
                  } );
 
             // The Default task for this script can be set here.

@@ -1,7 +1,7 @@
 using CK.Core;
 using CK.Setup;
 using CK.Testing;
-using CK.Testing.CKDatabaseLocal;
+using CK.Testing.SqliteLocal;
 using CK.Text;
 using System;
 using System.Collections.Generic;
@@ -11,18 +11,18 @@ using System.Threading.Tasks;
 
 namespace CK.Testing
 {
-    public class CKDatabaseLocalTestHelper : ICKDatabaseLocalTestHelperCore
+    public class SqliteLocalTestHelper : ISqliteLocalTestHelperCore
     {
         readonly ISqliteDBSetupTestHelper _dbSetup;
 
-        internal CKDatabaseLocalTestHelper(ITestHelperConfiguration config, ISqliteDBSetupTestHelper ckSetup)
+        internal SqliteLocalTestHelper(ITestHelperConfiguration config, ISqliteDBSetupTestHelper ckSetup)
         {
             _dbSetup = ckSetup;
             _dbSetup.CKSetup.InitializeStorePath += OnInitializeStorePath;
         }
 
-        IEnumerable<NormalizedPath> ICKDatabaseLocalTestHelperCore.CKDatabaseComponentsPaths => GetCKDatabaseComponentsPaths();
-        IEnumerable<NormalizedPath> GetCKDatabaseComponentsPaths()
+        IEnumerable<NormalizedPath> ISqliteLocalTestHelperCore.CKSqliteComponentsPaths => GetSqliteComponentsPaths();
+        IEnumerable<NormalizedPath> GetSqliteComponentsPaths()
         {
             yield return _dbSetup.SolutionFolder.Combine($"CK.Sqlite.Setup.Model/bin/{_dbSetup.BuildConfiguration}/netstandard2.0");
             yield return _dbSetup.SolutionFolder.Combine($"CK.Sqlite.Setup.Model/bin/{_dbSetup.BuildConfiguration}/net461");
@@ -30,10 +30,10 @@ namespace CK.Testing
             yield return _dbSetup.SolutionFolder.Combine($"CK.Sqlite.Setup.Runtime/bin/{_dbSetup.BuildConfiguration}/net461");
         }
 
-        IEnumerable<NormalizedPath> ICKDatabaseLocalTestHelperCore.AllLocalComponentsPaths => GetAllLocalComponentsPaths();
+        IEnumerable<NormalizedPath> ISqliteLocalTestHelperCore.AllLocalComponentsPaths => GetAllLocalComponentsPaths();
         IEnumerable<NormalizedPath> GetAllLocalComponentsPaths()
         {
-            foreach (var p in GetCKDatabaseComponentsPaths()) yield return p;
+            foreach (var p in GetSqliteComponentsPaths()) yield return p;
         }
 
         void OnInitializeStorePath(object sender, CKSetup.StorePathInitializationEventArgs e)
@@ -56,7 +56,7 @@ namespace CK.Testing
             }
         }
 
-        void ICKDatabaseLocalTestHelperCore.DeleteAllLocalComponentsPublishedFolders()
+        void ISqliteLocalTestHelperCore.DeleteAllLocalComponentsPublishedFolders()
         {
             using (_dbSetup.Monitor.OpenInfo("Deleting published Setup dependencies"))
             {
@@ -71,9 +71,9 @@ namespace CK.Testing
         }
 
         /// <summary>
-        /// Gets the <see cref="ICKDatabaseLocalTestHelper"/> default implementation.
+        /// Gets the <see cref="ISqliteLocalTestHelper"/> default implementation.
         /// </summary>
-        public static ICKDatabaseLocalTestHelper TestHelper => TestHelperResolver.Default.Resolve<ICKDatabaseLocalTestHelper>();
+        public static ISqliteLocalTestHelper TestHelper => TestHelperResolver.Default.Resolve<ISqliteLocalTestHelper>();
 
     }
 }

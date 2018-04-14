@@ -14,6 +14,8 @@ environment:
     secure: z3ZFnSM3FPCaJYkLhqjZmFTCw1Wf1hmRznQ0/UfxY/5haxctmymvFhh+PTz+/eHw
   CKSETUPREMOTESTORE_PUSH_API_KEY:
     secure: ffSyq7zhajO1GUXQraZnZiZGtrPjUMGXXhlS71JUDouxx43VgzbtRfqmZM6zKTmS
+  CKSETUP_CAKE_TARGET_STORE_APIKEY_AND_URL:
+    secure: ffSyq7zhajO1GUXQraZnZiZGtrPjUMGXXhlS71JUDos5aibfGQQ0zf4BWRjM02dn3zrvVnGZBp6bZwULB/ffASa7PO3mcKcqvppnG6eLYDU=
 build_script:
   - dotnet run --project CodeCakeBuilder -nointeraction
 test: off

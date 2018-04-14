@@ -47,7 +47,7 @@ namespace CK.Sqlite.Setup
             if( config == null ) throw new ArgumentNullException( nameof( config ) );
             _config = config;
             _setupConfiguration = setupConfiguration.Service;
-            _databases = new SqliteManagerProvider( monitor, m => m.IgnoreMissingDependencyIsError = _config.IgnoreMissingDependencyIsError );
+            _databases = new SqliteManagerProvider( monitor );
             _databases.Add( SqliteDatabase.DefaultDatabaseName, _config.DefaultDatabaseConnectionString );
             foreach( var db in _config.Databases )
             {
@@ -102,12 +102,6 @@ namespace CK.Sqlite.Setup
         /// Gets the configuration object.
         /// </summary>
         public SqliteSetupAspectConfiguration Configuration => _config;
-
-        /// <summary>
-        /// Gets whether the resolution of objects must be done globally.
-        /// This is a temporary property: this should eventually be the only mode...
-        /// </summary>
-        public bool GlobalResolution => _config.GlobalResolution;
 
         /// <summary>
         /// Gets the default database as a <see cref="ISqliteManagerBase"/> object.

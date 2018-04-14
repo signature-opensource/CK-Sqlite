@@ -69,12 +69,12 @@ namespace CK.Sqlite
             return b.ToString();
         }
 
-        public static DateTime? ReadDateTimeFromSqliteValue(object value)
+        public static DateTime? ReadDateTimeFromSqliteValue( object value )
         {
-            if (value == null || value == DBNull.Value) { return null; }
-            if (value is string stringValue ) { return DateTime.ParseExact(stringValue, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal); }
-            if (value is long longValue) { return Util.UnixEpoch + TimeSpan.FromSeconds(longValue); }
-            throw new NotSupportedException($"Could not parse SQLite date with unsupported type {value.GetType().FullName}");
+            if( value == null || value == DBNull.Value ) return null; 
+            if( value is string stringValue ) return DateTime.ParseExact( stringValue, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal );
+            if( value is long longValue ) return Util.UnixEpoch + TimeSpan.FromSeconds( longValue );
+            throw new NotSupportedException( $"Could not parse SQLite date with unsupported type {value.GetType().FullName}" );
         }
     }
 }

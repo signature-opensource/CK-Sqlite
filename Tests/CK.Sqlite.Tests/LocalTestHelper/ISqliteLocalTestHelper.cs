@@ -7,7 +7,7 @@ using CK.Testing;
 
 namespace CK.Testing
 {
-    public interface ICKDatabaseLocalTestHelper : IMixinTestHelper, ISqliteDBSetupTestHelper, CKDatabaseLocal.ICKDatabaseLocalTestHelperCore
+    public interface ISqliteLocalTestHelper : IMixinTestHelper, ISqliteDBSetupTestHelper, SqliteLocal.ISqliteLocalTestHelperCore
     {
     }
 }

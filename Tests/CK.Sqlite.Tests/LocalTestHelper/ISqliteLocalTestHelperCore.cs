@@ -3,21 +3,21 @@ using System.Collections.Generic;
 using CK.Testing;
 using CK.Text;
 
-namespace CK.Testing.CKDatabaseLocal
+namespace CK.Testing.SqliteLocal
 {
     /// <summary>
-    /// Helper local to CK-Database solution.
+    /// Helper local to Sqlite solution.
     /// </summary>
-    public interface ICKDatabaseLocalTestHelperCore
+    public interface ISqliteLocalTestHelperCore
     {
         /// <summary>
-        /// Gets the bin paths in net461 and netstandard2.0 (or netcoreapp2.0) for StObj, Setupable
-        /// and SqlServer.Setup.
+        /// Gets the bin paths in net461 and netstandard2.0 (or netcoreapp2.0) for CK.Sqlite.Setup.Model
+        /// and CK.Sqlite.Setup.Runtime.
         /// </summary>
-        IEnumerable<NormalizedPath> CKDatabaseComponentsPaths { get; }
+        IEnumerable<NormalizedPath> CKSqliteComponentsPaths { get; }
 
         /// <summary>
-        /// Gets <see cref="CKDatabaseComponentsPaths"/> plus <see cref="SqlZonePackageComponentsPaths"/>
+        /// Gets <see cref="CKSqliteComponentsPaths"/> plus <see cref="SqlZonePackageComponentsPaths"/>
         /// (with the runtimes of SqlActorPackage and SqlZonePackage).
         /// </summary>
         IEnumerable<NormalizedPath> AllLocalComponentsPaths { get; }

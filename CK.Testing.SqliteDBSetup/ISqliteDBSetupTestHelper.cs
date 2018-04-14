@@ -9,7 +9,7 @@ namespace CK.Testing
     /// <summary>
     /// Mixin that supports SQLite DBSetup based on <see cref="ICKSetupTestHelper"/>.
     /// </summary>
-    public interface ISqliteDBSetupTestHelper : IMixinTestHelper, ICKSetupTestHelper, IStObjMapTestHelper, SqliteDBSetup.ISqliteDBSetupTestHelperCore
+    public interface ISqliteDBSetupTestHelper : IMixinTestHelper, ISetupableSetupTestHelper, SqliteDBSetup.ISqliteDBSetupTestHelperCore
     {
     }
 }

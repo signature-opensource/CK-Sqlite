@@ -26,7 +26,7 @@ namespace CK.Sqlite.Setup
             // If HasModel is not defined (ie. GetStObjProperty returned System.Type.Missing) or not a boolean or true, we do it.
             // Only HasModel = false will prevent us to associate a model.
             object hasModel = data.StObj.GetStObjProperty( "HasModel" );
-            if( !(hasModel is bool) || (bool)hasModel ) EnsureModel();
+            if( !(hasModel is bool) || (bool)hasModel ) EnsureModelPackage();
 
             if( !typeof( SqlitePackageBaseItemDriver ).IsAssignableFrom( data.DriverType ) )
             {
