@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using CK.Core;
 
-namespace CK.Sqlite.Setup
+namespace CK.Sqlite
 {
     /// <summary>
     /// Typed <see cref="SqliteDatabase"/> for the default <see cref="SqliteDatabase"/>.

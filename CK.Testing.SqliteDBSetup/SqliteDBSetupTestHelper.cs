@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 using System.Xml.Linq;
 using CK.Core;
 using CK.Setup;
+using CK.Sqlite;
 using CK.Testing.CKSetup;
 using CK.Testing.SqliteDBSetup;
 using CK.Text;
@@ -14,31 +15,38 @@ namespace CK.Testing
 {
     public class SqliteDBSetupTestHelper : ISqliteDBSetupTestHelperCore
     {
-        public static readonly string DefaultConnectionString = "Data Source=CKSetup; Mode=Memory; Cache=Shared";
-
         readonly ISetupableSetupTestHelper _setupableSetup;
         readonly string _defaultConnectionString;
+        readonly TemporarySqliteDatabase _tempDB;
 
         internal SqliteDBSetupTestHelper( ITestHelperConfiguration config, ISetupableSetupTestHelper setupableSetup )
         {
             _setupableSetup = setupableSetup;
             _setupableSetup.StObjSetupRunning += OnStObjSetupRunning;
-            _defaultConnectionString = config.Get( "Sqllite/DefaultConnectionString", DefaultConnectionString );
+            var c = config.Get( "Sqllite/DefaultConnectionString", null );
+            if( c == null )
+            {
+                _tempDB = new TemporarySqliteDatabase();
+                c = _tempDB.ConnectionString;
+            }
+            _defaultConnectionString = c;
         }
 
         void OnStObjSetupRunning( object sender, StObjSetup.StObjSetupRunningEventArgs e )
         {
             if( !e.StObjEngineConfiguration.Aspects.Any( c => c is SqliteSetupAspectConfiguration ) )
             {
+                _setupableSetup.Monitor.Info( $"Adding SqliteSetupAspectConfiguration to StObjEngineConfiguration on connection string {_defaultConnectionString}." );
                 var conf = new SqliteSetupAspectConfiguration();
                 conf.DefaultDatabaseConnectionString = _defaultConnectionString;
 
-                e.ForceSetup |= _defaultConnectionString == DefaultConnectionString;
                 e.StObjEngineConfiguration.Aspects.Add( conf );
             }
         }
 
         string ISqliteDBSetupTestHelperCore.SqliteDefaultConnectionString => _defaultConnectionString;
+
+        bool ISqliteDBSetupTestHelperCore.SqliteDatabaseIsTemporarySqliteDatabase => _tempDB != null;
 
         CKSetupRunResult ISqliteDBSetupTestHelperCore.RunSqliteSetup(string connectionString, bool traceStObjGraphOrdering, bool traceSetupGraphOrdering, bool revertNames)
         {
@@ -53,8 +61,6 @@ namespace CK.Testing
                 try
                 {
                     var stObjConf = StObjSetupTestHelper.CreateDefaultConfiguration( _setupableSetup );
-
-                    stObjConf.ForceSetup |= connectionString == _defaultConnectionString;
 
                     var setupable = new SetupableAspectConfiguration();
                     setupable.RevertOrderingNames = revertNames;

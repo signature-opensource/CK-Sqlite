@@ -5,7 +5,7 @@ using System.Text;
 using CK.Core;
 using CK.Setup;
 
-namespace CK.Sqlite.Setup
+namespace CK.Sqlite
 {
     /// <summary>
     /// Attribute that must decorate a <see cref="SqlitePackage"/> class.

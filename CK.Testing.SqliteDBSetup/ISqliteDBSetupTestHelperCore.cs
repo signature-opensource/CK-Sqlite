@@ -1,5 +1,6 @@
 
 using CKSetup;
+using CK.Sqlite;
 using System;
 
 namespace CK.Testing.SqliteDBSetup
@@ -13,12 +14,17 @@ namespace CK.Testing.SqliteDBSetup
     {
         /// <summary>
         /// Gets the default connection string that will be used from "Sqllite/DefaultConnectionString" configuration
-        /// if it exists or defaults to the teporary, in memory "Data Source=CKSetup; Mode=Memory; Cache=Shared".
+        /// if it exists or defaults to a <see cref="TemporarySqliteDatabase"/>.
         /// </summary>
         string SqliteDefaultConnectionString { get; }
 
         /// <summary>
-        /// Runs the database setup in <see cref="IBasicTestHelper.BinFolder"/> on the default database.
+        /// Gets whether the <see cref="SqliteDefaultConnectionString"/> is bound to a <see cref="TemporarySqliteDatabase"/>.
+        /// </summary>
+        bool SqliteDatabaseIsTemporarySqliteDatabase { get; }
+
+        /// <summary>
+        /// Runs the database setup in <see cref="IBasicTestHelper.BinFolder"/> on a connection string.
         /// This method calls <see cref="StObjSetup.IStObjSetupTestHelperCore.RunStObjSetup"/>.
         /// </summary>
         /// <param name="connectionString">Connection string. Defaults to <see cref="SqliteDefaultConnectionString"/>.</param>

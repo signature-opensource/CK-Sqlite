@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static CK.Testing.SqliteLocalTestHelper;
+using static CK.Testing.SqliteDBSetupTestHelper;
 
 namespace CK.Sqlite.Tests
 {
@@ -16,7 +16,7 @@ namespace CK.Sqlite.Tests
         public void delete_netcore_published_folders()
         {
             TestHelper.LogToConsole = true;
-            TestHelper.DeleteAllLocalComponentsPublishedFolders();
+            TestHelper.CleanupFolder( TestHelper.SolutionFolder.Combine( $"CK.Sqlite.Setup.Runtime/bin/{TestHelper.BuildConfiguration}/netcoreapp2.0/publish" ) );
         }
     }
 }

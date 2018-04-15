@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace CK.Sqlite.Setup
+namespace CK.Sqlite
 {
     [Setup(
         ItemKind = DependentItemKindSpec.Group,

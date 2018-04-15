@@ -3,7 +3,7 @@ using FluentAssertions;
 using Microsoft.Data.Sqlite;
 using NUnit.Framework;
 using System;
-using static CK.Testing.SqliteLocalTestHelper;
+using static CK.Testing.SqliteDBSetupTestHelper;
 
 namespace CK.Sqlite.Tests
 {
@@ -13,19 +13,19 @@ namespace CK.Sqlite.Tests
 
 
         [Test]
-        public void standard_dbsetup_on_temp_file()
+        public void setup_on_automatic_temporary_database()
         {
+            TestHelper.RunSqliteSetup().Should().Be( CKSetupRunResult.Succeed );
+
             using( SqliteConnection conn = new SqliteConnection( TestHelper.SqliteDefaultConnectionString ) )
             {
-                TestHelper.RunSqliteSetup().Should().Be( CKSetupRunResult.Succeed );
-
                 conn.Open();
                 TestThatLocalPackagesHaveBeenInstalled( conn );
             }
         }
 
         [Test]
-        public void standard_dbsetup_on_fixed_file()
+        public void setup_on_explicit_database_file()
         {
             using( var db = new TemporarySqliteDatabase() )
             {
