@@ -65,7 +65,7 @@ namespace CK.Testing
                     var setupable = new SetupableAspectConfiguration();
                     setupable.RevertOrderingNames = revertNames;
                     setupable.TraceDependencySorterInput = traceSetupGraphOrdering;
-                    setupable.TraceDependencySorterInput = traceSetupGraphOrdering;
+                    setupable.TraceDependencySorterOutput = traceSetupGraphOrdering;
                     stObjConf.Configuration.Aspects.Add( setupable );
 
                     var sqlite = new SqliteSetupAspectConfiguration();
