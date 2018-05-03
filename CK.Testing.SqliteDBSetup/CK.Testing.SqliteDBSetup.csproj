@@ -1,14 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <Import Project="..\Common\Shared.props" />
-
   <PropertyGroup>
     <TargetFrameworks>net461;netstandard2.0</TargetFrameworks>
   </PropertyGroup>
-
   <ItemGroup>
-    <PackageReference Include="CK.Testing.CKSetup" Version="6.0.0-r09" />
-    <PackageReference Include="CK.Testing.StObjMap" Version="6.0.0-p05" />
-    <PackageReference Include="Microsoft.Data.SQLite" Version="2.0.1" />
+    <PackageReference Include="CK.Testing.SetupableSetup" Version="6.0.0" />
+    <ProjectReference Include="../CK.Sqlite.Setup.Model/CK.Sqlite.Setup.Model.csproj" />
   </ItemGroup>
 </Project>

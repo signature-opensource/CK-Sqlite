@@ -1,31 +1,21 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <Import Project="..\..\Common\Shared.props" />
-
   <PropertyGroup>
     <TargetFramework>net461</TargetFramework>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
-  
   <ItemGroup>
     <EmbeddedResource Include="**\*.sql" />
   </ItemGroup>
-  
   <ItemGroup>
-    <PackageReference Include="CK.Testing.CKSetup" Version="6.0.0-r09" />
-    <PackageReference Include="FluentAssertions" Version="4.19.4" />
     <PackageReference Include="NUnit" Version="[2.6.4]" />
     <PackageReference Include="NUnit.Runners.Net4" Version="2.6.4" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\..\CK.Sqlite.Setup.Model\CK.Sqlite.Setup.Model.csproj" />
-    <ProjectReference Include="..\..\CK.Sqlite.Setup.Runtime\CK.Sqlite.Setup.Runtime.csproj" />
     <ProjectReference Include="..\..\CK.Testing.SqliteDBSetup\CK.Testing.SqliteDBSetup.csproj" />
   </ItemGroup>
-
   <ItemGroup>
     <Service Include="{82a7f48d-3b50-4b1e-b82e-3ada8210c358}" />
   </ItemGroup>
-
 </Project>

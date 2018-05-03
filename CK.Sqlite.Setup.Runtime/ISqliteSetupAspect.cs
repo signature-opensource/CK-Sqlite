@@ -18,11 +18,5 @@ namespace CK.Sqlite.Setup
         /// </summary>
         ISqliteManagerProvider SqliteDatabases { get; }
 
-        /// <summary>
-        /// Gets whether the resolution of objects must be done globally.
-        /// This is a temporary property: this should eventually be the only mode...
-        /// </summary>
-        bool GlobalResolution { get; }
-
     }
 }

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace CK.Sqlite.Setup
+namespace CK.Sqlite
 {
     [Setup(
         ItemKind = DependentItemKindSpec.Group,
@@ -13,7 +13,7 @@ namespace CK.Sqlite.Setup
     public class SqliteDatabase : ISqliteConnectionStringProvider
     {
         /// <summary>
-        /// Default database name is "db": this is the name of the <see cref="SqliteDefaultDatabase"/> type.
+        /// Default database name is "sqlite": this is the name of the <see cref="SqliteDefaultDatabase"/> type.
         /// </summary>
         public const string DefaultDatabaseName = SqliteSetupAspectConfiguration.DefaultDatabaseName;
         bool _installCore;
@@ -24,12 +24,15 @@ namespace CK.Sqlite.Setup
             Name = name;
         }
 
-        public string ConnectionString { get; set; }
-
         /// <summary>
         /// Gets or sets the connection string.
         /// This can be automatically configured during setup (if the specialized class implements a StObjConstruct method with a connectionString parameter
         /// and sets this property).
+        /// </summary>
+        public string ConnectionString { get; set; }
+
+        /// <summary>
+        /// Gets the name of this database.
         /// </summary>
         public string Name { get; }
 
@@ -45,7 +48,7 @@ namespace CK.Sqlite.Setup
         }
 
         /// <summary>
-        /// Default database name is <see cref="DefaultDatabaseName"/> = "db".
+        /// Default database name is <see cref="DefaultDatabaseName"/> = "sqlite".
         /// </summary>
         public bool IsDefaultDatabase => Name == DefaultDatabaseName;
     }

@@ -16,14 +16,9 @@ namespace CK.Sqlite.Setup
     /// </summary>
     public class SqliteManager : ISqliteManager
     {
-        static List<string> _protectedDatabaseNames = new List<string>() { "master", "msdb", "tempdb", "model" };
-
         readonly IActivityMonitor _monitor;
         SqliteConnection _oCon;
-        bool _checkTranCount;
         bool _ckCoreInstalled;
-        bool _missingDependencyIsError;
-        bool _ignoreMissingDependencyIsError;
 
         /// <summary>
         /// Initializes a new SqlManager.
@@ -32,7 +27,6 @@ namespace CK.Sqlite.Setup
         {
             if( monitor == null ) throw new ArgumentNullException( "monitor" );
             _monitor = monitor;
-            _checkTranCount = true;
         }
 
         /// <summary>
@@ -61,9 +55,7 @@ namespace CK.Sqlite.Setup
             Debug.Assert( _oCon == null );
             try
             {
-                _oCon = new SqliteConnection( connectionString );
-                CheckAction( "opening", _oCon.Database );
-                
+                _oCon = new SqliteConnection( connectionString );                
                 if( _monitor != null )
                 {
                     _oCon.StateChange += new StateChangeEventHandler( OnConnStateChange );
@@ -80,40 +72,6 @@ namespace CK.Sqlite.Setup
         void CheckOpen()
         {
             if( _oCon == null ) throw new InvalidOperationException( "SqliteManager is closed." );
-        }
-
-        /// <summary>
-        /// Gets or sets whether transaction count must be equal before and after 
-        /// executing scripts. Defaults to true.
-        /// </summary>
-        bool CheckTransactionCount
-        {
-            get { return _checkTranCount; }
-            set { _checkTranCount = value; }
-        }
-
-        /// <summary>
-        /// Gets or sets whether whenever a creation script is executed, the informational message
-        /// 'The module 'X' depends on the missing object 'Y'. The module will still be created; however, it cannot run successfully until the object exists.' 
-        /// must be logged as a <see cref="LogLevel.Error"/>. When false, this is a <see cref="LogLevel.Info"/>.
-        /// Defaults to false.
-        /// Note that if <see cref="IgnoreMissingDependencyIsError"/> is true, this property has no effect and a missing dependency will remain informational.
-        /// </summary>
-        public bool MissingDependencyIsError
-        {
-            get { return _missingDependencyIsError; }
-            set { _missingDependencyIsError = value; }
-        }
-
-        /// <summary>
-        /// Gets or sets whether <see cref="MissingDependencyIsError"/> must be ignored.
-        /// When true, MissingDependencyIsError is always considered to be false.
-        /// Defaults to true (MissingDependencyIsError is honored).
-        /// </summary>
-        public bool IgnoreMissingDependencyIsError
-        {
-            get { return _ignoreMissingDependencyIsError; }
-            set { _ignoreMissingDependencyIsError = value; }
         }
 
         /// <summary>
@@ -172,14 +130,6 @@ namespace CK.Sqlite.Setup
                 _ckCoreInstalled = SqliteCKCoreInstaller.Install( this, monitor );
             }
             return _ckCoreInstalled;
-        }
-
-        void CheckAction( string action, string dbName )
-        {
-            if( dbName == null || dbName.Length == 0 || _protectedDatabaseNames.Contains( dbName ) )
-            {
-                throw new Exception( $"Attempt to {action} database '{dbName}'." );
-            }
         }
 
         class SqliteExecutor : ISqliteScriptExecutor

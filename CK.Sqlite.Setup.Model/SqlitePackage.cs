@@ -1,6 +1,6 @@
 using CK.Core;
 
-namespace CK.Sqlite.Setup
+namespace CK.Sqlite
 {
     public class SqlitePackage : SqlitePackageBase, IAmbientContractDefiner
     {

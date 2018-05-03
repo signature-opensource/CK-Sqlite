@@ -12,9 +12,9 @@ namespace CK.Setup
     public class SqliteSetupAspectConfiguration : IStObjEngineAspectConfiguration
     {
         /// <summary>
-        /// Default database name is "db".
+        /// Default database name is "sqlite".
         /// </summary>
-        public const string DefaultDatabaseName = "db";
+        public const string DefaultDatabaseName = "sqlite";
 
         readonly List<SqliteDatabaseDescriptor> _databases;
 
@@ -29,8 +29,6 @@ namespace CK.Setup
         static readonly XName xDatabases = XNamespace.None + "Databases";
         static readonly XName xDatabase = XNamespace.None + "Database";
         static readonly XName xDefaultDatabaseConnectionString = XNamespace.None + "DefaultDatabaseConnectionString";
-        static readonly XName xGlobalResolution = XNamespace.None + "GlobalResolution";
-        static readonly XName xIgnoreMissingDependencyIsError = XNamespace.None + "IgnoreMissingDependencyIsError";
 
         /// <summary>
         /// Initializes a new <see cref="SqlSetupAspectConfiguration"/> from its xml representation.
@@ -40,8 +38,6 @@ namespace CK.Setup
         {
             _databases = e.Elements( xDatabases ).Elements( xDatabase ).Select( d => new SqliteDatabaseDescriptor( d ) ).ToList();
             DefaultDatabaseConnectionString = e.Element( xDefaultDatabaseConnectionString )?.Value;
-            GlobalResolution = string.Equals( e.Element( xGlobalResolution )?.Value, "true", StringComparison.OrdinalIgnoreCase );
-            IgnoreMissingDependencyIsError = string.Equals( e.Element( xIgnoreMissingDependencyIsError )?.Value, "true", StringComparison.OrdinalIgnoreCase );
         }
 
         /// <summary>
@@ -53,11 +49,10 @@ namespace CK.Setup
         public XElement SerializeXml( XElement e )
         {
             e.Add( new XElement( xDatabases, _databases.Select( d => d.Serialize( new XElement( xDatabase ) ) ) ),
-                   new XElement( xDefaultDatabaseConnectionString, DefaultDatabaseConnectionString ),
-                   GlobalResolution ? new XElement( xGlobalResolution, "true" ) : null,
-                   IgnoreMissingDependencyIsError ? new XElement( xGlobalResolution, "true" ) : null );
+                   new XElement( xDefaultDatabaseConnectionString, DefaultDatabaseConnectionString ) );
             return e;
         }
+
         /// <summary>
         /// Gets or sets the default database connection string.
         /// </summary>
@@ -81,23 +76,8 @@ namespace CK.Setup
             return null;
         }
 
-        /// <summary>
-        /// Gets or set whether the resolution of objects must be done globally.
-        /// This is a temporary property: this should eventually be the only mode...
-        /// </summary>
-        public bool GlobalResolution { get; set; }
-
         string IStObjEngineAspectConfiguration.AspectType => "CK.Sqlite.Setup.SqliteSetupAspect, CK.Sqlite.Setup.Runtime";
 
-
-        /// <summary>
-        /// Gets or sets whether when installing, the informational message 'The module 'X' depends 
-        /// on the missing object 'Y'. The module will still be created; however, it cannot run successfully until the object exists.' 
-        /// must always be logged as a LogLevel.Info.
-        /// Defaults to false.
-        /// This applies to all <see cref="Databases"/>.
-        /// </summary>
-        public bool IgnoreMissingDependencyIsError { get; set; }
 
     }
 }

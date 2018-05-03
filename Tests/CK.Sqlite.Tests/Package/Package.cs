@@ -1,5 +1,4 @@
 using CK.Setup;
-using CK.Sqlite.Setup;
 using System;
 using System.Collections.Generic;
 using System.Text;
