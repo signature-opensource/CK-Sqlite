@@ -5,8 +5,8 @@
     <Description>CK-Database Runtime and Engine provider for SQLite.</Description>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="CK.Setupable.Runtime" Version="6.0.1-C0029-develop" />
-    <PackageReference Include="Yodii.Script" Version="0.6.1-C0019-develop" />
+    <PackageReference Include="CK.Setupable.Runtime" Version="6.0.1-C0033-local" />
+    <PackageReference Include="Yodii.Script" Version="0.6.1-C0022-local" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CK.Sqlite.Setup.Model\CK.Sqlite.Setup.Model.csproj" />
