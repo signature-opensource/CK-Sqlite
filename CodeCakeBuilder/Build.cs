@@ -37,10 +37,11 @@ namespace CodeCake
             ComponentProjectPaths = new []
             {
                 GetNet461BinFolder( "CK.Sqlite.Setup.Model", configuration ),
+                GetNetStandard20BinFolder( "CK.Sqlite.Setup.Model", configuration ),
+
                 GetNet461BinFolder( "CK.Sqlite.Setup.Runtime", configuration ),
-                
-                GetNetCoreBinFolder( "CK.Sqlite.Setup.Model", configuration ),
-                GetNetCoreBinFolder( "CK.Sqlite.Setup.Runtime", configuration )
+                GetNetCoreApp20BinFolder( "CK.Sqlite.Setup.Runtime", configuration ),
+                GetNetCoreApp21BinFolder( "CK.Sqlite.Setup.Runtime", configuration )
             };
         }
 
@@ -51,14 +52,19 @@ namespace CodeCake
             return System.IO.Path.GetFullPath( name + "/bin/" + configuration + "/net461" );
         }
 
-        static NormalizedPath GetNetCoreBinFolder( string name, string configuration )
+        static NormalizedPath GetNetStandard20BinFolder( string name, string configuration )
         {
-            string pathToFramework = System.IO.Path.GetFullPath( name + "/bin/" + configuration + "/netstandard2.0" );
-            if( !Directory.Exists( pathToFramework ) )
-            {
-                pathToFramework = System.IO.Path.GetFullPath( name + "/bin/" + configuration + "/netcoreapp2.0/publish" );
-            }
-            return pathToFramework;
+            return System.IO.Path.GetFullPath( name + "/bin/" + configuration + "/netstandard2.0" );
+        }
+
+        static NormalizedPath GetNetCoreApp20BinFolder( string name, string configuration )
+        {
+            return System.IO.Path.GetFullPath( name + "/bin/" + configuration + "/netcoreapp2.0/publish" );
+        }
+
+        static NormalizedPath GetNetCoreApp21BinFolder( string name, string configuration )
+        {
+            return System.IO.Path.GetFullPath( name + "/bin/" + configuration + "/netcoreapp2.1/publish" );
         }
     }
 
@@ -120,12 +126,25 @@ namespace CodeCake
                      StandardSolutionBuild( solutionFileName, gitInfo, globalInfo.BuildConfiguration );
                      // It has to be published here to inject the Version information.
                      componentProjects = new ComponentProjects( globalInfo.BuildConfiguration );
-                     foreach( var pub in componentProjects.ComponentProjectPaths.Where( p => p.LastPart == "publish" ) )
+                     foreach( var pub in componentProjects.ComponentProjectPaths
+                                            .Where( p => p.LastPart == "publish"
+                                                         && p.Parts[p.Parts.Count - 2] == "netcoreapp2.0" ) )
                      {
                          Cake.DotNetCorePublish( pub.RemoveLastPart( 4 ),
                             new DotNetCorePublishSettings().AddVersionArguments( gitInfo, s =>
                             {
                                 s.Framework = "netcoreapp2.0";
+                                s.Configuration = globalInfo.BuildConfiguration;
+                            } ) );
+                     }
+                     foreach( var pub in componentProjects.ComponentProjectPaths
+                                            .Where( p => p.LastPart == "publish"
+                                                         && p.Parts[p.Parts.Count - 2] == "netcoreapp2.1" ) )
+                     {
+                         Cake.DotNetCorePublish( pub.RemoveLastPart( 4 ),
+                            new DotNetCorePublishSettings().AddVersionArguments( gitInfo, s =>
+                            {
+                                s.Framework = "netcoreapp2.1";
                                 s.Configuration = globalInfo.BuildConfiguration;
                             } ) );
                      }
@@ -156,7 +175,7 @@ namespace CodeCake
                     var components = componentProjects.ComponentProjectPaths.Select( x => x.ToString() );
 
                     var storeConf = Cake.CKSetupCreateDefaultConfiguration();
-                    if( globalInfo.IsBlankCIRelease )
+                    if( globalInfo.IsLocalCIRelease )
                     {
                         storeConf.TargetStoreUrl = System.IO.Path.Combine( globalInfo.LocalFeedPath, "CKSetupStore" );
                     }
