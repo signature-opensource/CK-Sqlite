@@ -98,7 +98,7 @@ create temporary table if not exists TMP_T
 ";
 
         internal static string MergeTemporaryTableScript = @"
-insert or replace into CKCore_tItemVersionStore( FullName, ItemType, ItemVersion ) select F, V, T from TMP_T;";
+insert or replace into CKCore_tItemVersionStore( FullName, ItemType, ItemVersion ) select F, T, V from TMP_T;";
 
         internal static string CreateVersionTableScript = @"
 create table if not exists CKCore_tItemVersionStore
