@@ -8,6 +8,8 @@ namespace CK.Sqlite.Setup
 {
     public class SqliteSetupAspect : IStObjEngineAspect, ISqliteSetupAspect, IDisposable
     {
+        static readonly string EnvironmentConnectionStringPrefix = "$ENV::";
+
         readonly SqliteSetupAspectConfiguration _config;
         readonly ISetupableAspectConfiguration _setupConfiguration;
         readonly SqliteManagerProvider _databases;
@@ -48,11 +50,31 @@ namespace CK.Sqlite.Setup
             _config = config;
             _setupConfiguration = setupConfiguration.Service;
             _databases = new SqliteManagerProvider( monitor );
-            _databases.Add( SqliteDatabase.DefaultDatabaseName, _config.DefaultDatabaseConnectionString );
+            string defaultDatabaseConnectionString = ParsePrefixedEnvironmentString( _config.DefaultDatabaseConnectionString );
+            _databases.Add( SqliteDatabase.DefaultDatabaseName, defaultDatabaseConnectionString );
             foreach( var db in _config.Databases )
             {
                 _databases.Add( db.LogicalDatabaseName, db.ConnectionString );
             }
+        }
+
+        string ParsePrefixedEnvironmentString( string environmentString )
+        {
+            string parsedString = environmentString;
+            if(
+                // Allow "$ENV::*" but not "$ENV::"
+                (environmentString.Length > EnvironmentConnectionStringPrefix.Length + 1)
+                && environmentString.StartsWith( EnvironmentConnectionStringPrefix )
+                )
+            {
+                string environmentVariableName = environmentString.Substring( EnvironmentConnectionStringPrefix.Length );
+                parsedString = Environment.GetEnvironmentVariable( environmentVariableName );
+                if( parsedString == null )
+                {
+                    throw new InvalidOperationException( $"The environment variable \"{environmentVariableName}\" specified in \"{environmentString}\" was not set." );
+                }
+            }
+            return parsedString;
         }
 
         bool IStObjEngineAspect.Configure( IActivityMonitor monitor, IStObjEngineConfigureContext context )

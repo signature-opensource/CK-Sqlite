@@ -25,6 +25,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CK.Testing.SqliteDBSetup", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeCakeBuilder", "CodeCakeBuilder\CodeCakeBuilder.csproj", "{ACD6DB7B-FF50-41B5-B107-0A3AE23E66A5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CK.Sqlite.Setup.Runtime.Tests", "Tests\CK.Sqlite.Setup.Runtime.Tests\CK.Sqlite.Setup.Runtime.Tests.csproj", "{D59E523A-0C4F-4FD6-946B-455B761228B7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,12 +53,17 @@ Global
 		{ACD6DB7B-FF50-41B5-B107-0A3AE23E66A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ACD6DB7B-FF50-41B5-B107-0A3AE23E66A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ACD6DB7B-FF50-41B5-B107-0A3AE23E66A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D59E523A-0C4F-4FD6-946B-455B761228B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D59E523A-0C4F-4FD6-946B-455B761228B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D59E523A-0C4F-4FD6-946B-455B761228B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D59E523A-0C4F-4FD6-946B-455B761228B7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{87995CBF-EFC2-464E-8BD6-E2977E8FC496} = {E41EE025-81BA-44EC-899A-4B0E1D2190DB}
+		{D59E523A-0C4F-4FD6-946B-455B761228B7} = {E41EE025-81BA-44EC-899A-4B0E1D2190DB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {40F56495-1F4F-4279-9A6D-6098152768FD}
