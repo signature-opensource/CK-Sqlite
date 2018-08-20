@@ -62,7 +62,7 @@
         <CKSetupVersion>6.0.0-r09</CKSetupVersion>
         <CKTestingVersion>0.3.0</CKTestingVersion>
         <MonoCecilVersion>0.10.0-beta7</MonoCecilVersion>
-        <FluentAssertionsVersion>4.19.4</FluentAssertionsVersion>
+        <FluentAssertionsVersion>5.4.1</FluentAssertionsVersion>
     </PropertyGroup>
 
     <!-- 
