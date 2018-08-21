@@ -49,10 +49,10 @@ namespace CK.Sqlite.Setup
                 }
                 else
                 {
-                    o.SetAmbiantPropertyConfiguration( monitor, "Database", null, Attribute.Database, StObjRequirementBehavior.WarnIfNotStObj );
+                    o.SetAmbiantPropertyConfiguration( monitor, "Database", Attribute.Database, StObjRequirementBehavior.WarnIfNotStObj );
                 }
             }
-            else o.SetAmbiantPropertyConfiguration( monitor, "Database", null, typeof( SqliteDefaultDatabase ), StObjRequirementBehavior.WarnIfNotStObj );
+            else o.SetAmbiantPropertyConfiguration( monitor, "Database", typeof( SqliteDefaultDatabase ), StObjRequirementBehavior.WarnIfNotStObj );
             // ResourceLocation is a StObjProperty.
             o.SetStObjPropertyValue( monitor, "ResourceLocation", new ResourceLocator( Attribute.ResourceType, Attribute.ResourcePath, o.ObjectType ) );
 
