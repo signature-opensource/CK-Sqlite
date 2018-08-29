@@ -65,7 +65,7 @@ namespace CK.Sqlite.Setup
         public SqliteDatabaseItem( IActivityMonitor monitor, IStObjSetupData data )
             : base( monitor, data, typeof( SqliteDatabaseItemDriver ) )
         {
-            Context = data.StObj.Context.Context;
+            Context = data.StObj.StObjMap.MapName;
             Location = ActualObject.Name;
             Name = SqlDatabaseItemName;
             ConnectionItem = new SqliteDatabaseConnectionItem( this );
