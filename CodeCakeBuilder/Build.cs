@@ -40,7 +40,6 @@ namespace CodeCake
                 GetNetStandard20BinFolder( "CK.Sqlite.Setup.Model", configuration ),
 
                 GetNet461BinFolder( "CK.Sqlite.Setup.Runtime", configuration ),
-                GetNetCoreApp20BinFolder( "CK.Sqlite.Setup.Runtime", configuration ),
                 GetNetCoreApp21BinFolder( "CK.Sqlite.Setup.Runtime", configuration )
             };
         }
