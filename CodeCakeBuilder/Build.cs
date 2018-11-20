@@ -57,11 +57,6 @@ namespace CodeCake
             return System.IO.Path.GetFullPath( name + "/bin/" + configuration + "/netstandard2.0" );
         }
 
-        static NormalizedPath GetNetCoreApp20BinFolder( string name, string configuration )
-        {
-            return System.IO.Path.GetFullPath( name + "/bin/" + configuration + "/netcoreapp2.0/publish" );
-        }
-
         static NormalizedPath GetNetCoreApp21BinFolder( string name, string configuration )
         {
             return System.IO.Path.GetFullPath( name + "/bin/" + configuration + "/netcoreapp2.1/publish" );
@@ -90,7 +85,7 @@ namespace CodeCake
             var projectsToPublish = projects
                                         .Where( p => !p.Path.Segments.Contains( "Tests" ) );
 
-            // Initialized by Build: the netstandard2.0/netcoreapp2.0 directory must exist
+            // Initialized by Build: the netstandard2.0/netcoreapp2.1 directory must exist
             // since we rely on them to find the target...
             ComponentProjects componentProjects = null;
 
@@ -126,17 +121,7 @@ namespace CodeCake
                      StandardSolutionBuild( solutionFileName, gitInfo, globalInfo.BuildConfiguration );
                      // It has to be published here to inject the Version information.
                      componentProjects = new ComponentProjects( globalInfo.BuildConfiguration );
-                     foreach( var pub in componentProjects.ComponentProjectPaths
-                                            .Where( p => p.LastPart == "publish"
-                                                         && p.Parts[p.Parts.Count - 2] == "netcoreapp2.0" ) )
-                     {
-                         Cake.DotNetCorePublish( pub.RemoveLastPart( 4 ),
-                            new DotNetCorePublishSettings().AddVersionArguments( gitInfo, s =>
-                            {
-                                s.Framework = "netcoreapp2.0";
-                                s.Configuration = globalInfo.BuildConfiguration;
-                            } ) );
-                     }
+
                      foreach( var pub in componentProjects.ComponentProjectPaths
                                             .Where( p => p.LastPart == "publish"
                                                          && p.Parts[p.Parts.Count - 2] == "netcoreapp2.1" ) )
@@ -156,7 +141,7 @@ namespace CodeCake
                                      || Cake.ReadInteractiveOption( "RunUnitTests", "Run Unit Tests?", 'Y', 'N' ) == 'Y' )
                 .Does( () =>
                  {
-                     StandardUnitTests( globalInfo.BuildConfiguration, projects.Where( p => p.Name.EndsWith( ".Tests" ) ) );
+                     StandardUnitTests( globalInfo, projects.Where( p => p.Name.EndsWith( ".Tests" ) ) );
                  } );
 
             Task( "Create-All-NuGet-Packages" )

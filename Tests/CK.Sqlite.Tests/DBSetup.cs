@@ -16,7 +16,7 @@ namespace CK.Sqlite.Tests
         public void delete_netcore_published_folders()
         {
             TestHelper.LogToConsole = true;
-            TestHelper.CleanupFolder( TestHelper.SolutionFolder.Combine( $"CK.Sqlite.Setup.Runtime/bin/{TestHelper.BuildConfiguration}/netcoreapp2.0/publish" ) );
+            TestHelper.CleanupFolder( TestHelper.SolutionFolder.Combine( $"CK.Sqlite.Setup.Runtime/bin/{TestHelper.BuildConfiguration}/netcoreapp2.1/publish" ) );
         }
     }
 }
