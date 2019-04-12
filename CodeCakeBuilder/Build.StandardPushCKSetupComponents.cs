@@ -87,7 +87,7 @@ new CKSetupComponent( "CK.Sqlite.Setup.Runtime", "netcoreapp2.1" )
             if( components == null ) components = GetCKSetupComponents();
             if( !Cake.CKSetupPublishAndAddComponentFoldersToStore(
                         storeConf,
-                        components.Select( c => c.GetBinPath( globalInfo.IsRelease ? "Debug" : "Release" ) ) ) )
+                        components.Select( c => c.GetBinPath( globalInfo.IsRelease ? "Release" : "Debug" ) ) ) )
             {
                 Cake.TerminateWithError( "Error while registering components in local temporary store." );
             }
