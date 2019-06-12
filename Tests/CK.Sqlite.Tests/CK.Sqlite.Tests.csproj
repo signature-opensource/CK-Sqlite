@@ -8,7 +8,7 @@
     <EmbeddedResource Include="**\*.sql" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="NUnit" Version="[2.6.4]" />
+    <PackageReference Include="NUnit" Version="3.12.0" />
     <PackageReference Include="NUnit.Runners.Net4" Version="2.6.4" />
   </ItemGroup>
   <ItemGroup>
