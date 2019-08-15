@@ -10,6 +10,9 @@ using Microsoft.Data.Sqlite;
 
 namespace CK.Sqlite.Setup
 {
+    /// <summary>
+    /// Implements <see cref="IVersionedItemReader"/>.
+    /// </summary>
     public class SqliteVersionedItemReader : IVersionedItemReader
     {
         /// <summary>
