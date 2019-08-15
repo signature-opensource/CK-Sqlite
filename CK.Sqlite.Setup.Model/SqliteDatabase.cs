@@ -1,3 +1,4 @@
+using CK.Core;
 using CK.Setup;
 using System;
 using System.Collections.Generic;
@@ -5,11 +6,9 @@ using System.Text;
 
 namespace CK.Sqlite
 {
-    [Setup(
-        ItemKind = DependentItemKindSpec.Group,
-        TrackAmbientProperties = TrackAmbientPropertiesMode.AddPropertyHolderAsChildren,
-        ItemTypeName = "CK.Sqlite.Setup.SqliteDatabaseItem,CK.Sqlite.Setup.Runtime"
-        )]
+    [Setup( ItemKind = DependentItemKindSpec.Group,
+            TrackAmbientProperties = TrackAmbientPropertiesMode.AddPropertyHolderAsChildren,
+            ItemTypeName = "CK.Sqlite.Setup.SqliteDatabaseItem,CK.Sqlite.Setup.Runtime" )]
     public class SqliteDatabase : ISqliteConnectionStringProvider
     {
         /// <summary>

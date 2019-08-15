@@ -9,7 +9,7 @@ namespace CK.Sqlite
     /// <summary>
     /// Typed <see cref="SqliteDatabase"/> for the default <see cref="SqliteDatabase"/>.
     /// </summary>
-    public class SqliteDefaultDatabase : SqliteDatabase, IAmbientContract
+    public class SqliteDefaultDatabase : SqliteDatabase, IAmbientObject
     {
         /// <summary>
         /// Initializes the default database. Its name is <see cref="SqliteDatabase.DefaultDatabaseName"/>.

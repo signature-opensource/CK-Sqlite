@@ -28,16 +28,16 @@ namespace CK.Sqlite.Setup
 
         public static void AutoInitialize( ISqliteManager m )
         {
-            var monitor = m.Monitor;
-            using( monitor.OpenTrace( "Installing SqlVersionedItemRepository store." ) )
+            using( m.Monitor.OpenTrace( "Installing SqlVersionedItemRepository store." ) )
             {
                 m.ExecuteNonQuery( CreateVersionTableScript );
             }
         }
 
-        public IReadOnlyCollection<VersionedTypedName> GetOriginalVersions( IActivityMonitor monitor )
+        public OriginalReadInfo GetOriginalVersions( IActivityMonitor monitor )
         {
-            var result = new List<VersionedTypedName>();
+            var items = new List<VersionedTypedName>();
+            var features = new List<VFeature>();
             if( !_initialized )
             {
                 AutoInitialize( Manager );
@@ -49,15 +49,12 @@ namespace CK.Sqlite.Setup
                 while( r.Read() )
                 {
                     string fullName = r.GetString( 0 );
-                    Version v;
-                    if( !Version.TryParse( r.GetString( 2 ), out v ) )
-                    {
-                        throw new Exception( $"Unable to parse version for {fullName}: '{r.GetString( 2 )}'." );
-                    }
-                    result.Add( new VersionedTypedName( fullName, r.GetString( 1 ), v ) );
+                    string itemType = r.GetString( 1 );
+                    if( itemType == "VFeature" ) features.Add( new VFeature( fullName, CSemVer.SVersion.Parse( r.GetString( 2 ) ) ) );
+                    else items.Add( new VersionedTypedName( fullName, itemType, Version.Parse(  r.GetString( 2 ) ) ) );
                 }
             }
-            return result;
+            return new OriginalReadInfo( items, features );
         }
 
 
@@ -68,10 +65,7 @@ namespace CK.Sqlite.Setup
             {
                 return originalVersions( "[]db^" + item.FullName.Substring( 11 ) );
             }
-            // Old code: Handle non-prefixed FullName when not found.
-            return item.FullName.StartsWith( "[]db^", StringComparison.Ordinal )
-                    ? originalVersions( item.FullName.Substring( 5 ) )
-                    : null;
+            return null;
         }
 
         public VersionedName OnPreviousVersionNotFound( IVersionedItem item, VersionedName prevVersion, Func<string, VersionedTypedName> originalVersions )
@@ -82,9 +76,7 @@ namespace CK.Sqlite.Setup
                 return originalVersions( "[]db^" + prevVersion.FullName.Substring( 11 ) );
             }
             // Old code: Handle non-prefixed FullName when not found.
-            return prevVersion.FullName.StartsWith( "[]db^", StringComparison.Ordinal )
-                    ? originalVersions( prevVersion.FullName.Substring( 5 ) )
-                    : null;
+            return null;
         }
 
         internal static string CreateTemporaryTableScript = @"

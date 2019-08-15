@@ -9,7 +9,7 @@ namespace CK.Sqlite.Setup
     public class SqliteSetupAspect : IStObjEngineAspect, ISqliteSetupAspect, IDisposable
     {
         readonly SqliteSetupAspectConfiguration _config;
-        readonly ISetupableAspectConfiguration _setupConfiguration;
+        readonly ISetupableAspectRunConfiguration _setupConfiguration;
         readonly SqliteManagerProvider _databases;
         ISqliteManagerBase _defaultDatabase;
 
@@ -41,7 +41,7 @@ namespace CK.Sqlite.Setup
         /// <param name="config">Configuration object.</param>
         /// <param name="monitor">Monitor to use.</param>
         /// <param name="setupConfiguration"></param>
-        public SqliteSetupAspect( SqliteSetupAspectConfiguration config, IActivityMonitor monitor, ConfigureOnly<ISetupableAspectConfiguration> setupConfiguration )
+        public SqliteSetupAspect( SqliteSetupAspectConfiguration config, IActivityMonitor monitor, ConfigureOnly<ISetupableAspectRunConfiguration> setupConfiguration )
         {
             if( setupConfiguration.Service == null ) throw new ArgumentNullException( nameof( setupConfiguration ) );
             if( config == null ) throw new ArgumentNullException( nameof( config ) );

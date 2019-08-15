@@ -21,7 +21,7 @@ namespace CK.Sqlite.Setup
         public SqlitePackageBaseItemDriver( BuildInfo info )
             : base( info )
         {
-            SqlitePackageBase p = Item.ActualObject;
+            SqlitePackage p = Item.ActualObject;
             Debug.Assert( (int)SetupCallGroupStep.Init == 1 && (int)SetupCallGroupStep.SettleContent == 6 );
         }
 
