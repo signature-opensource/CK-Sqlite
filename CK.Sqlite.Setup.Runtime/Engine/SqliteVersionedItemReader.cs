@@ -7,6 +7,7 @@ using CK.Core;
 using CK.Setup;
 using System.Diagnostics;
 using Microsoft.Data.Sqlite;
+using CK.Text;
 
 namespace CK.Sqlite.Setup
 {
@@ -57,6 +58,7 @@ namespace CK.Sqlite.Setup
                     else items.Add( new VersionedTypedName( fullName, itemType, Version.Parse(  r.GetString( 2 ) ) ) );
                 }
             }
+            monitor.Trace( $"Existing VFeatures: {features.Select( f => f.ToString() ).Concatenate()}" );
             return new OriginalReadInfo( items, features );
         }
 
