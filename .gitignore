@@ -266,6 +266,6 @@ Tests/CK.SqlServer.Setup.Engine.Tests/TestStores/
 Tests/SqlActorPackage.Tests/CKSetupWorkingDirectory/
 
 Tests/**/TestResult*.xml
-CodeCakeBuilder/UnitTestsDone.*.txt
 Tests/**/Logs/
 Tests/**/CKSetup-WorkingDir/
+CodeCakeBuilder/MemoryKey.*.txt
