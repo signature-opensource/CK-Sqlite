@@ -9,7 +9,7 @@ namespace CK.Sqlite
     /// <summary>
     /// Base attribute for <see cref="SqliteTableAttribute"/> and <see cref="SqlitePackageAttribute"/>.
     /// </summary>
-    public abstract class SqlitePackageAttributeBase : Setup.AmbientContextBoundDelegationAttribute
+    public abstract class SqlitePackageAttributeBase : Setup.ContextBoundDelegationAttribute
     {
         /// <summary>
         /// Initializes a new <see cref="SqlitePackageAttributeBase"/>.
