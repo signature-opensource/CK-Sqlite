@@ -11,7 +11,7 @@ namespace CK.Sqlite
     /// </summary>
     [StObj( ItemKind = DependentItemKindSpec.Container )]
     [StObjProperty( PropertyName = "ResourceLocation", PropertyType = typeof( IResourceLocator ) )]
-    [AutoRealDefiner]
+    [CKTypeDefiner]
     public class SqlitePackage : ISqliteConnectionStringProvider, IRealObject
     {
         /// <summary>
