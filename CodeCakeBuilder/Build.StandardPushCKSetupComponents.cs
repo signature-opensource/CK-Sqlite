@@ -20,7 +20,8 @@ namespace CodeCake
 new CKSetupComponent( "CK.Sqlite.Setup.Model", "net461" ),
 new CKSetupComponent( "CK.Sqlite.Setup.Model", "netstandard2.0" ),
 new CKSetupComponent( "CK.Sqlite.Setup.Runtime", "net461" ),
-new CKSetupComponent( "CK.Sqlite.Setup.Runtime", "netcoreapp2.1" )
+new CKSetupComponent( "CK.Sqlite.Setup.Runtime", "netcoreapp2.1" ),
+new CKSetupComponent( "CK.Sqlite.Setup.Runtime", "netcoreapp2.2" )
 };
         }
 
