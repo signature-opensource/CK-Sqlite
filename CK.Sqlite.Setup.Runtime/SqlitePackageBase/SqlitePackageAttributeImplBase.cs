@@ -29,9 +29,9 @@ namespace CK.Sqlite.Setup
 
         void IStObjStructuralConfigurator.Configure( IActivityMonitor monitor, IStObjMutableItem o )
         {
-            if( !typeof( SqlitePackageBase ).IsAssignableFrom( o.ObjectType.GetTypeInfo().BaseType ) )
+            if( !typeof( SqlitePackage ).IsAssignableFrom( o.ObjectType.BaseType ) )
             {
-                monitor.Error( $"{o.ToString()}: Attribute {GetType().Name} must be set only on class that specialize SqlPackageBase." );
+                monitor.Error( $"{o.ToString()}: Attribute {GetType().Name} must be set only on class that specialize SqlitePackage." );
             }
             if( Attribute.Package != null )
             {
@@ -45,14 +45,14 @@ namespace CK.Sqlite.Setup
             {
                 if( !typeof( SqliteDatabase ).IsAssignableFrom( Attribute.Database ) )
                 {
-                    monitor.Error( $"{o.ToString()}: Database type property must reference a type that specializes SqlDatabase." );
+                    monitor.Error( $"{o.ToString()}: Database type property must reference a type that specializes SqliteDatabase." );
                 }
                 else
                 {
-                    o.SetAmbiantPropertyConfiguration( monitor, "Database", Attribute.Database, StObjRequirementBehavior.WarnIfNotStObj );
+                    o.SetAmbientPropertyConfiguration( monitor, "Database", Attribute.Database, StObjRequirementBehavior.WarnIfNotStObj );
                 }
             }
-            else o.SetAmbiantPropertyConfiguration( monitor, "Database", typeof( SqliteDefaultDatabase ), StObjRequirementBehavior.WarnIfNotStObj );
+            else o.SetAmbientPropertyConfiguration( monitor, "Database", typeof( SqliteDefaultDatabase ), StObjRequirementBehavior.WarnIfNotStObj );
             // ResourceLocation is a StObjProperty.
             o.SetStObjPropertyValue( monitor, "ResourceLocation", new ResourceLocator( Attribute.ResourceType, Attribute.ResourcePath, o.ObjectType ) );
 
@@ -80,7 +80,7 @@ namespace CK.Sqlite.Setup
         {
             if( data.IsDefaultFullNameWithoutContext )
             {
-                var p = (SqlitePackageBase)data.StObj.InitialObject;
+                var p = (SqlitePackage)data.StObj.InitialObject;
                 var autoName = data.StObj.ObjectType.Name;
                 if( data.IsFullNameWithoutContextAvailable( autoName ) )
                 {

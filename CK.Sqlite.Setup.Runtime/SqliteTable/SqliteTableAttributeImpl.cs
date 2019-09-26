@@ -24,8 +24,7 @@ namespace CK.Sqlite.Setup
         protected new SqliteTableAttribute Attribute => (SqliteTableAttribute)base.Attribute;
 
         /// <summary>
-        /// Transfers <see cref="SqliteTableAttribute.TableName" /> as a direct property "TableName" of the StObj item
-        /// and <see cref="SqlitePackageAttributeBase.Schema"/> as the "Schema" ambient property.
+        /// Transfers <see cref="SqliteTableAttribute.TableName" /> as a direct property "TableName" of the StObj item.
         /// </summary>
         /// <param name="monitor">The monitor to use.</param>
         /// <param name="o">The configured object.</param>

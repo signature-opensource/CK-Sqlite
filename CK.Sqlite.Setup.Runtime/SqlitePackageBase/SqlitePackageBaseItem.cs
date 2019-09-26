@@ -19,7 +19,7 @@ namespace CK.Sqlite.Setup
             : base( monitor, data )
         {
             Context = data.StObj.StObjMap.MapName;
-            SqlitePackageBase p = ActualObject;
+            SqlitePackage p = ActualObject;
             if( p.Database != null ) Location = p.Database.Name;
             ResourceLocation = (ResourceLocator)data.StObj.GetStObjProperty( "ResourceLocation" );
             // By default, a Sql package always has a an associated Model package.
@@ -36,9 +36,9 @@ namespace CK.Sqlite.Setup
         }
 
         /// <summary>
-        /// Masked to formally be associated to <see cref="SqlPackageBase"/>.
+        /// Masked to formally be associated to <see cref="SqlPackage"/>.
         /// </summary>
-        public new SqlitePackageBase ActualObject => (SqlitePackageBase)base.ActualObject;
+        public new SqlitePackage ActualObject => (SqlitePackage)base.ActualObject;
 
         /// <summary>
         /// Gets or sets a <see cref="ResourceLocation"/> that locates the resources associated 
