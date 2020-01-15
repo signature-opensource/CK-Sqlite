@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <Import Project="..\..\Common\Shared.props" />
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <IsPackable>False</IsPackable>
   </PropertyGroup>
   <ItemGroup>
@@ -15,8 +15,5 @@
   <ItemGroup>
     <ProjectReference Include="..\..\CK.Sqlite.Setup.Model\CK.Sqlite.Setup.Model.csproj" />
     <ProjectReference Include="..\..\CK.Testing.SqliteDBSetup\CK.Testing.SqliteDBSetup.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{82a7f48d-3b50-4b1e-b82e-3ada8210c358}" />
   </ItemGroup>
 </Project>
