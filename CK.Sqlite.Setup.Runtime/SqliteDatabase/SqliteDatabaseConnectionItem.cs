@@ -61,5 +61,8 @@ namespace CK.Sqlite.Setup
         public string Location => _db.Location;
 
         string IContextLocNaming.TransformArg => null;
+
+        /// <inheritdoc />
+        public IContextLocNaming CombineName( string n ) => new ContextLocName( new ContextLocNameStructImpl( this ).CombineName( n ) );
     }
 }
