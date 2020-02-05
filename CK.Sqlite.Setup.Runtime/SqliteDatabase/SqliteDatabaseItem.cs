@@ -55,6 +55,9 @@ namespace CK.Sqlite.Setup
             public IEnumerable<IDependentItemRef> Children => null;
 
             public object StartDependencySort( IActivityMonitor m ) => null;
+
+            /// <inheritdoc />
+            public IContextLocNaming CombineName( string n ) => new ContextLocName( new ContextLocNameStructImpl( this ).CombineName( n ) );
         }
 
         /// <summary>
