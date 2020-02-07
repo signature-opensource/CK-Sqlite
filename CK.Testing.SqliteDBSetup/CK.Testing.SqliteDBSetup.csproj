@@ -4,7 +4,7 @@
     <TargetFrameworks>netcoreapp3.1</TargetFrameworks>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="CK.Testing.SetupableSetup" Version="13.0.0-a00-00-0023-develop" />
+    <PackageReference Include="CK.Testing.SetupableSetup" Version="13.0.0-a00-00-0024-develop" />
     <ProjectReference Include="../CK.Sqlite.Setup.Model/CK.Sqlite.Setup.Model.csproj" />
   </ItemGroup>
 </Project>
