@@ -31,6 +31,17 @@ namespace CK.Sqlite.Setup
         /// </summary>
         public string FullName => _db.FullName + ".Connection";
 
+
+        /// <summary>
+        /// Gets the context name.
+        /// </summary>
+        public string Context => _db.Context;
+
+        /// <summary>
+        /// Gets the location.
+        /// </summary>
+        public string Location => _db.Location; 
+        
         /// <summary>
         /// Gets the name of this connection: it is the Name of the <see cref="SqliteDatabase"/> suffixed with ".Connection".
         /// </summary>
@@ -48,17 +59,10 @@ namespace CK.Sqlite.Setup
 
         object IDependentItem.StartDependencySort( IActivityMonitor m ) => typeof( SqliteDatabaseConnectionItemDriver );
 
+        public IContextLocNaming CombineName( string n ) => new ContextLocName( Context, Location, Name ).CombineName( n );
+
         bool IDependentItemRef.Optional => false;
 
-        /// <summary>
-        /// Gets the context name.
-        /// </summary>
-        public string Context => _db.Context;
-
-        /// <summary>
-        /// Gets the location.
-        /// </summary>
-        public string Location => _db.Location;
 
         string IContextLocNaming.TransformArg => null;
     }

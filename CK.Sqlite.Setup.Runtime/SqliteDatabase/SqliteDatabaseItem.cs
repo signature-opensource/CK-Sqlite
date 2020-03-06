@@ -38,6 +38,8 @@ namespace CK.Sqlite.Setup
 
             public string FullName => DefaultContextLocNaming.Format( _holder.Context, _holder.Location, Name );
 
+            public IContextLocNaming CombineName( string n ) => new ContextLocName( Context, Location, Name ).CombineName( n );
+
             string IContextLocNaming.TransformArg => null;
 
             public IDependentItemRef Generalization => null;
