@@ -17,7 +17,7 @@ namespace CodeCake
         {
             return new CKSetupComponent[]{
 
-new CKSetupComponent( "CK.Sqlite.Setup.Model", "netstandard2.0" ),
+new CKSetupComponent( "CK.Sqlite.Setup.Model", "netstandard2.1" ),
 new CKSetupComponent( "CK.Sqlite.Setup.Runtime", "netcoreapp3.1" )
 };
         }
@@ -85,7 +85,7 @@ new CKSetupComponent( "CK.Sqlite.Setup.Runtime", "netcoreapp3.1" )
             if( components == null ) components = GetCKSetupComponents();
             if( !Cake.CKSetupPublishAndAddComponentFoldersToStore(
                         storeConf,
-                        components.Select( c => c.GetBinPath( globalInfo.IsRelease ? "Release" : "Debug" ) ) ) )
+                        components.Select( c => c.GetBinPath( globalInfo.BuildInfo.BuildConfiguration ) ) ) )
             {
                 Cake.TerminateWithError( "Error while registering components in local temporary store." );
             }

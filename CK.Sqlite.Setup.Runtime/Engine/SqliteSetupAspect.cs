@@ -26,7 +26,7 @@ namespace CK.Sqlite.Setup
             {
                 base.ResolveParameterValue( monitor, parameter );
                 if( parameter.Name == "connectionString"
-                    && parameter.Owner.InitialObject is SqliteDatabase db )
+                    && parameter.Owner.FinalImplementation.Implementation is SqliteDatabase db )
                 {
                     parameter.SetParameterValue( _config.FindConnectionStringByName( db.Name ) );
                 }
