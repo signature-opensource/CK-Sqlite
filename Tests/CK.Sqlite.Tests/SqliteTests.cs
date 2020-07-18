@@ -1,3 +1,4 @@
+using CK.Setup;
 using CKSetup;
 using FluentAssertions;
 using Microsoft.Data.Sqlite;
@@ -15,7 +16,7 @@ namespace CK.Sqlite.Tests
         [Test]
         public void setup_on_automatic_temporary_database()
         {
-            TestHelper.RunSqliteSetup().Should().Be( CKSetupRunResult.Succeed );
+            TestHelper.RunSqliteSetup( CompileOption.Compile ).Should().Be( CKSetupRunResult.Succeed );
 
             using( SqliteConnection conn = new SqliteConnection( TestHelper.SqliteDefaultConnectionString ) )
             {
@@ -29,7 +30,7 @@ namespace CK.Sqlite.Tests
         {
             using( var db = new TemporarySqliteDatabase() )
             {
-                TestHelper.RunSqliteSetup( db.ConnectionString )
+                TestHelper.RunSqliteSetup( CompileOption.Compile, db.ConnectionString )
                     .Should().Be( CKSetupRunResult.Succeed );
 
                 using( SqliteConnection conn = new SqliteConnection( db.ConnectionString ) )

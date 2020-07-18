@@ -2,6 +2,7 @@
 using CKSetup;
 using CK.Sqlite;
 using System;
+using CK.Setup;
 
 namespace CK.Testing.SqliteDBSetup
 {
@@ -27,12 +28,13 @@ namespace CK.Testing.SqliteDBSetup
         /// Runs the database setup in <see cref="IBasicTestHelper.BinFolder"/> on a connection string.
         /// This method calls <see cref="StObjSetup.IStObjSetupTestHelperCore.RunStObjSetup"/>.
         /// </summary>
+        /// <param name="c">Whether the code should be compiled.</param>
         /// <param name="connectionString">Connection string. Defaults to <see cref="SqliteDefaultConnectionString"/>.</param>
         /// <param name="traceStObjGraphOrdering">True to trace input and output of StObj graph ordering.</param>
         /// <param name="traceSetupGraphOrdering">True to trace input and output of setup graph ordering.</param>
         /// <param name="revertNames">True to revert names in ordering.</param>
         /// <returns>The setup result: succeed, failed or up-to-date.</returns>
-        CKSetupRunResult RunSqliteSetup( string connectionString = null, bool traceStObjGraphOrdering = false, bool traceSetupGraphOrdering = false, bool revertNames = false);
+        CKSetupRunResult RunSqliteSetup( CompileOption c, string connectionString = null, bool traceStObjGraphOrdering = false, bool traceSetupGraphOrdering = false, bool revertNames = false );
 
     }
 }

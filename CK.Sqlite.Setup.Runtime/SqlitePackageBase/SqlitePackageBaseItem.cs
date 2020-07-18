@@ -18,7 +18,7 @@ namespace CK.Sqlite.Setup
         public SqlitePackageBaseItem( IActivityMonitor monitor, IStObjSetupData data )
             : base( monitor, data )
         {
-            Context = data.StObj.StObjMap.MapName;
+            Context = data.StObj.StObjMap.Names[0];
             SqlitePackage p = ActualObject;
             if( p.Database != null ) Location = p.Database.Name;
             ResourceLocation = (ResourceLocator)data.StObj.GetStObjProperty( "ResourceLocation" );

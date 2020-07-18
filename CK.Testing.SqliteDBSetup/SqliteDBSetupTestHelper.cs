@@ -48,19 +48,20 @@ namespace CK.Testing
 
         bool ISqliteDBSetupTestHelperCore.SqliteDatabaseIsTemporarySqliteDatabase => _tempDB != null;
 
-        CKSetupRunResult ISqliteDBSetupTestHelperCore.RunSqliteSetup(string connectionString, bool traceStObjGraphOrdering, bool traceSetupGraphOrdering, bool revertNames)
+        CKSetupRunResult ISqliteDBSetupTestHelperCore.RunSqliteSetup(CompileOption c, string connectionString, bool traceStObjGraphOrdering, bool traceSetupGraphOrdering, bool revertNames)
         {
-            return DoRunSqliteDBSetup(connectionString, traceStObjGraphOrdering, traceSetupGraphOrdering, revertNames);
+            return DoRunSqliteDBSetup(c, connectionString, traceStObjGraphOrdering, traceSetupGraphOrdering, revertNames);
         }
 
-        CKSetupRunResult DoRunSqliteDBSetup(string connectionString, bool traceStObjGraphOrdering, bool traceSetupGraphOrdering, bool revertNames)
+        CKSetupRunResult DoRunSqliteDBSetup( CompileOption c, string connectionString, bool traceStObjGraphOrdering, bool traceSetupGraphOrdering, bool revertNames )
         {
             if( connectionString == null ) connectionString = _defaultConnectionString;
-            using (_setupableSetup.Monitor.OpenInfo($"Running SqliteSetup on {connectionString}."))
+            using( _setupableSetup.Monitor.OpenInfo( $"Running SqliteSetup on {connectionString}." ) )
             {
                 try
                 {
                     var stObjConf = StObjSetupTestHelper.CreateDefaultConfiguration( _setupableSetup );
+                    stObjConf.Configuration.BinPaths.ForEach( b => b.CompileOption = c );
 
                     var setupable = new SetupableAspectConfiguration();
                     setupable.RevertOrderingNames = revertNames;
