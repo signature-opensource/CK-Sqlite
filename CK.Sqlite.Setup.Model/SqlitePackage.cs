@@ -11,8 +11,8 @@ namespace CK.Sqlite
     /// </summary>
     [StObj( ItemKind = DependentItemKindSpec.Container )]
     [StObjProperty( PropertyName = "ResourceLocation", PropertyType = typeof( IResourceLocator ) )]
-    [AmbientDefiner]
-    public class SqlitePackage : ISqliteConnectionStringProvider, IAmbientObject
+    [CKTypeDefiner]
+    public class SqlitePackage : ISqliteConnectionStringProvider, IRealObject
     {
         /// <summary>
         /// Gets or sets the database to which this package belongs.
