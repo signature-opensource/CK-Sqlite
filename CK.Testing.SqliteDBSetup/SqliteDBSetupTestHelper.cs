@@ -62,6 +62,9 @@ namespace CK.Testing
                 {
                     var stObjConf = StObjSetupTestHelper.CreateDefaultConfiguration( _setupableSetup );
                     stObjConf.Configuration.BinPaths.ForEach( b => b.CompileOption = c );
+                    stObjConf.Configuration.RevertOrderingNames = revertNames;
+                    stObjConf.Configuration.TraceDependencySorterInput = traceStObjGraphOrdering;
+                    stObjConf.Configuration.TraceDependencySorterOutput = traceStObjGraphOrdering;
 
                     var setupable = new SetupableAspectConfiguration();
                     setupable.RevertOrderingNames = revertNames;
