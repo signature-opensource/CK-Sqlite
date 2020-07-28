@@ -12,6 +12,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\CK.Sqlite.Setup.Model\CK.Sqlite.Setup.Model.csproj" />
     <ProjectReference Include="..\..\CK.Testing.SqliteDBSetup\CK.Testing.SqliteDBSetup.csproj" />
-    <ProjectReference Include="..\..\MicroModel\MicroModel.csproj" />
+    <ProjectReference Include="..\MicroModel\MicroModel.csproj" />
   </ItemGroup>
 </Project>
