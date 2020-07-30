@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -48,19 +49,24 @@ namespace CK.Testing
 
         bool ISqliteDBSetupTestHelperCore.SqliteDatabaseIsTemporarySqliteDatabase => _tempDB != null;
 
-        CKSetupRunResult ISqliteDBSetupTestHelperCore.RunSqliteSetup(string connectionString, bool traceStObjGraphOrdering, bool traceSetupGraphOrdering, bool revertNames)
+        CKSetupRunResult ISqliteDBSetupTestHelperCore.RunSqliteSetup( string connectionString, bool traceStObjGraphOrdering, bool traceSetupGraphOrdering, bool revertNames )
         {
-            return DoRunSqliteDBSetup(connectionString, traceStObjGraphOrdering, traceSetupGraphOrdering, revertNames);
+            return DoRunSqliteDBSetup( connectionString, traceStObjGraphOrdering, traceSetupGraphOrdering, revertNames );
         }
 
-        CKSetupRunResult DoRunSqliteDBSetup(string connectionString, bool traceStObjGraphOrdering, bool traceSetupGraphOrdering, bool revertNames)
+        CKSetupRunResult DoRunSqliteDBSetup( string connectionString, bool traceStObjGraphOrdering, bool traceSetupGraphOrdering, bool revertNames )
         {
             if( connectionString == null ) connectionString = _defaultConnectionString;
-            using (_setupableSetup.Monitor.OpenInfo($"Running SqliteSetup on {connectionString}."))
+            using( _setupableSetup.Monitor.OpenInfo( $"Running SqliteSetup on {connectionString}." ) )
             {
                 try
                 {
                     var stObjConf = StObjSetupTestHelper.CreateDefaultConfiguration( _setupableSetup );
+                    Debug.Assert( stObjConf.Configuration.BinPaths.Count > 0 && stObjConf.Configuration.BinPaths[0].CompileOption == CompileOption.Compile );
+
+                    stObjConf.Configuration.RevertOrderingNames = revertNames;
+                    stObjConf.Configuration.TraceDependencySorterInput = traceStObjGraphOrdering;
+                    stObjConf.Configuration.TraceDependencySorterOutput = traceStObjGraphOrdering;
 
                     var setupable = new SetupableAspectConfiguration();
                     setupable.RevertOrderingNames = revertNames;
