@@ -272,3 +272,4 @@ CodeCakeBuilder/MemoryKey.*.txt
 /Tests/CK.Sqlite.Tests/LocalStores/
 
 CodeCakeBuilder/UnitTestsDone.*.txt
+$StObjGen/

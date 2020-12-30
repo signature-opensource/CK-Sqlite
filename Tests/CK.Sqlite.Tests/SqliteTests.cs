@@ -1,3 +1,4 @@
+using CK.Setup;
 using CKSetup;
 using FluentAssertions;
 using Microsoft.Data.Sqlite;
