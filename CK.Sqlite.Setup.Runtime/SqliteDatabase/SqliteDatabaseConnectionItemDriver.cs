@@ -34,7 +34,7 @@ namespace CK.Sqlite.Setup
         public ISqliteManagerBase SqliteManager => _connection;
 
         /// <summary>
-        /// Initializes the <see cref="SqlManager"/> based on the <see cref="Item"/>'s <see cref="SqliteDatabaseConnectionItem.SqliteDatabase"/>.
+        /// Initializes the <see cref="SqliteManager"/> based on the <see cref="Item"/>'s <see cref="SqliteDatabaseConnectionItem.SqliteDatabase"/>.
         /// </summary>
         /// <param name="monitor">The monitor to use.</param>
         /// <returns>True on success, false if the database can not be found in the <see cref="ISqliteManagerProvider"/>.</returns>

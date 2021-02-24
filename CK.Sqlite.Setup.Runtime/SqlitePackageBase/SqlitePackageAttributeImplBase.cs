@@ -14,7 +14,7 @@ namespace CK.Sqlite.Setup
         readonly SqlitePackageAttributeBase _attr;
 
         /// <summary>
-        /// Initializes a new <see cref="SqlPackageAttributeImplBase"/>
+        /// Initializes a new <see cref="SqlitePackageAttributeImplBase"/>
         /// </summary>
         /// <param name="a">The attribute.</param>
         protected SqlitePackageAttributeImplBase( SqlitePackageAttributeBase a )
@@ -80,7 +80,6 @@ namespace CK.Sqlite.Setup
         {
             if( data.IsDefaultFullNameWithoutContext )
             {
-                var p = (SqlitePackage)data.StObj.FinalImplementation.Implementation;
                 var autoName = data.StObj.ClassType.Name;
                 if( data.IsFullNameWithoutContextAvailable( autoName ) )
                 {
