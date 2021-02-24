@@ -26,12 +26,12 @@ namespace CK.Sqlite
         public Type Package { get; set; }
 
         /// <summary>
-        /// Gets or sets the Resource path to use for the <see cref="IResourceLocator"/>. 
+        /// Gets or sets the Resource path to use for the <see cref="CK.Setup.IResourceLocator"/>. 
         /// </summary>
         public string ResourcePath { get; set; }
 
         /// <summary>
-        /// Gets or sets the Resource Type to use for the <see cref="IResourceLocator"/>.
+        /// Gets or sets the Resource Type to use for the <see cref="CK.Setup.IResourceLocator"/>.
         /// When null (the default that should rarely be changed), it is the decorated type itself that is 
         /// used to locate the resources.
         /// </summary>
@@ -43,7 +43,6 @@ namespace CK.Sqlite
         /// </summary>
         /// <remarks>
         /// The type must be a specialization of <see cref="SqliteDatabase"/>. 
-        /// If it supports <see cref="IAmbientContract"/>, the property is bound to the corresponding ambient contract instance. 
         /// </remarks>
         public Type Database { get; set; }
     }

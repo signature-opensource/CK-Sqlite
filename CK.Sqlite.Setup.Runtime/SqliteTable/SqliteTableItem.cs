@@ -10,7 +10,7 @@ namespace CK.Sqlite.Setup
     public class SqliteTableItem : SqlitePackageBaseItem
     {
         /// <summary>
-        /// Initializes a new <see cref="SqlTableItem"/>.
+        /// Initializes a new <see cref="SqliteTableItem"/>.
         /// </summary>
         /// <param name="monitor">The monitor to use.</param>
         /// <param name="data">The StObj data.</param>
@@ -21,7 +21,7 @@ namespace CK.Sqlite.Setup
         }
 
         /// <summary>
-        /// Masked to formally be associated to <see cref="SqlTable"/>.
+        /// Masked to formally be associated to <see cref="SqliteTable"/>.
         /// </summary>
         public new SqliteTable ActualObject => (SqliteTable)base.ActualObject;
 

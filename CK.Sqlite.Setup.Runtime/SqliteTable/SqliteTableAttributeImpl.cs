@@ -19,7 +19,7 @@ namespace CK.Sqlite.Setup
         }
 
         /// <summary>
-        /// Masked to formally associates a <see cref="SqlTableAttribute"/> attribute.
+        /// Masked to formally associates a <see cref="SqliteTableAttribute"/> attribute.
         /// </summary>
         protected new SqliteTableAttribute Attribute => (SqliteTableAttribute)base.Attribute;
 

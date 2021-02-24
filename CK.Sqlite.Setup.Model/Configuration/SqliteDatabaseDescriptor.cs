@@ -24,7 +24,7 @@ namespace CK.Setup
         static readonly XName xAutoCreate = XNamespace.None + "AutoCreate";
 
         /// <summary>
-        /// Initializes a new <see cref="SqlDatabaseDescriptor"/> from its xml representation.
+        /// Initializes a new <see cref="SqliteDatabaseDescriptor"/> from its xml representation.
         /// </summary>
         /// <param name="e">The element.</param>
         public SqliteDatabaseDescriptor( XElement e )

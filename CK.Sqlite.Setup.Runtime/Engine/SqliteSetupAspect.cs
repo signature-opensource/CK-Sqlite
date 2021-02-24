@@ -34,8 +34,8 @@ namespace CK.Sqlite.Setup
         }
 
         /// <summary>
-        /// Initializes a new <see cref="SqlSetupAspect"/>.
-        /// This constructor is called by the StObjEngine whenever a <see cref="SqlSetupAspectConfiguration"/> configuration object
+        /// Initializes a new <see cref="SqliteSetupAspect"/>.
+        /// This constructor is called by the StObjEngine whenever a <see cref="SqliteSetupAspectConfiguration"/> configuration object
         /// appears in <see cref="StObjEngineConfiguration.Aspects"/> list.
         /// </summary>
         /// <param name="config">Configuration object.</param>
@@ -110,7 +110,7 @@ namespace CK.Sqlite.Setup
 
         /// <summary>
         /// Gets the available databases (including the <see cref="DefaultSqliteDatabase"/>).
-        /// It is initialized with <see cref="SqlSetupAspectConfiguration.Databases"/> content.
+        /// It is initialized with <see cref="SqliteSetupAspectConfiguration.Databases"/> content.
         /// </summary>
         public ISqliteManagerProvider SqliteDatabases => _databases;
 

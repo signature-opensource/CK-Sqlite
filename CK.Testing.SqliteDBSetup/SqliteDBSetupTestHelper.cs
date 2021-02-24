@@ -14,6 +14,9 @@ using CKSetup;
 
 namespace CK.Testing
 {
+    /// <summary>
+    /// Implements <see cref="ISqliteDBSetupTestHelperCore"/> and exposes its <see cref="TestHelper"/>.
+    /// </summary>
     public class SqliteDBSetupTestHelper : ISqliteDBSetupTestHelperCore
     {
         readonly ISetupableSetupTestHelper _setupableSetup;
@@ -61,24 +64,24 @@ namespace CK.Testing
             {
                 try
                 {
-                    var stObjConf = StObjSetupTestHelper.CreateDefaultConfiguration( _setupableSetup );
-                    Debug.Assert( stObjConf.Configuration.BinPaths.Count > 0 && stObjConf.Configuration.BinPaths[0].CompileOption == CompileOption.Compile );
+                    var (Configuration, ForceSetup) = StObjSetupTestHelper.CreateDefaultConfiguration( _setupableSetup );
+                    Debug.Assert( Configuration.BinPaths.Count > 0 && Configuration.BinPaths[0].CompileOption == CompileOption.Compile );
 
-                    stObjConf.Configuration.RevertOrderingNames = revertNames;
-                    stObjConf.Configuration.TraceDependencySorterInput = traceStObjGraphOrdering;
-                    stObjConf.Configuration.TraceDependencySorterOutput = traceStObjGraphOrdering;
+                    Configuration.RevertOrderingNames = revertNames;
+                    Configuration.TraceDependencySorterInput = traceStObjGraphOrdering;
+                    Configuration.TraceDependencySorterOutput = traceStObjGraphOrdering;
 
                     var setupable = new SetupableAspectConfiguration();
                     setupable.RevertOrderingNames = revertNames;
                     setupable.TraceDependencySorterInput = traceSetupGraphOrdering;
                     setupable.TraceDependencySorterOutput = traceSetupGraphOrdering;
-                    stObjConf.Configuration.Aspects.Add( setupable );
+                    Configuration.Aspects.Add( setupable );
 
                     var sqlite = new SqliteSetupAspectConfiguration();
                     sqlite.DefaultDatabaseConnectionString = connectionString;
-                    stObjConf.Configuration.Aspects.Add( sqlite );
+                    Configuration.Aspects.Add( sqlite );
 
-                    return _setupableSetup.RunStObjSetup( stObjConf.Configuration, stObjConf.ForceSetup );
+                    return _setupableSetup.RunStObjSetup( Configuration, ForceSetup );
                 }
                 catch( Exception ex )
                 {

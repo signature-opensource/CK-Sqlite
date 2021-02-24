@@ -21,7 +21,6 @@ namespace CK.Sqlite.Setup
         public SqlitePackageBaseItemDriver( BuildInfo info )
             : base( info )
         {
-            SqlitePackage p = Item.ActualObject;
             Debug.Assert( (int)SetupCallGroupStep.Init == 1 && (int)SetupCallGroupStep.SettleContent == 6 );
         }
 
@@ -87,7 +86,7 @@ namespace CK.Sqlite.Setup
                 var scripts = new IReadOnlyList<ISetupScript>[6];
                 for( var step = SetupCallGroupStep.Init; step <= SetupCallGroupStep.SettleContent; ++step )
                 {
-                    scripts[(int)step - 1] = Util.Array.Empty<ISetupScript>();
+                    scripts[(int)step - 1] = Array.Empty<ISetupScript>();
                     ScriptVector v = c.GetScriptVector( step, ExternalVersion?.Version, ItemVersion );
                     if( v != null && v.Scripts.Count > 0 )
                     {

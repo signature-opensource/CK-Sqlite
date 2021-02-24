@@ -8,7 +8,7 @@ namespace CK.Sqlite.Setup
 {
 
     /// <summary>
-    /// Extends <see cref="ISqlManagerBase"/> to offer minimal helpers
+    /// Extends <see cref="ISqliteManagerBase"/> to offer minimal helpers
     /// to query the database.
     /// </summary>
     public interface ISqliteManager : ISqliteManagerBase

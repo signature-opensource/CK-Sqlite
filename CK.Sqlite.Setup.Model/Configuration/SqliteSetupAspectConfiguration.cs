@@ -42,7 +42,7 @@ namespace CK.Setup
 
         /// <summary>
         /// Serializes its content in the provided <see cref="XElement"/> and returns it.
-        /// The <see cref="SqlSetupAspectConfiguration(XElement)"/> constructor will be able to read this element back.
+        /// The <see cref="SqliteSetupAspectConfiguration(XElement)"/> constructor will be able to read this element back.
         /// </summary>
         /// <param name="e">The element to populate.</param>
         /// <returns>The <paramref name="e"/> element.</returns>
@@ -59,7 +59,7 @@ namespace CK.Setup
         public string DefaultDatabaseConnectionString { get; set; }
 
         /// <summary>
-        /// Gets the list of available <see cref="SqlDatabaseDescriptor"/>.
+        /// Gets the list of available <see cref="SqliteDatabaseDescriptor"/>.
         /// </summary>
         public List<SqliteDatabaseDescriptor> Databases => _databases;
 

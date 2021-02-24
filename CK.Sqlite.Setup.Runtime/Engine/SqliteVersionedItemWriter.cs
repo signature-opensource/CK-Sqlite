@@ -19,7 +19,7 @@ namespace CK.Sqlite.Setup
         bool _initialized;
 
         /// <summary>
-        /// Initializes a new <see cref="SqlVersionedItemWriter"/>.
+        /// Initializes a new <see cref="SqliteVersionedItemWriter"/>.
         /// </summary>
         /// <param name="m">The sql manager to use.</param>
         public SqliteVersionedItemWriter( ISqliteManagerBase m )
@@ -50,8 +50,7 @@ namespace CK.Sqlite.Setup
             IReadOnlyCollection<VFeature> originalFeatures,
             IReadOnlyCollection<VFeature> finalFeatures )
         {
-            var sqlReader = reader as SqliteVersionedItemReader;
-            bool rewriteToSameDatabase = sqlReader != null && sqlReader.Manager == _manager;
+            bool rewriteToSameDatabase = reader is SqliteVersionedItemReader sqlReader && sqlReader.Manager == _manager;
             if( !rewriteToSameDatabase && !_initialized && _manager is ISqliteManager actualManager )
             {
                 SqliteVersionedItemReader.AutoInitialize( actualManager );

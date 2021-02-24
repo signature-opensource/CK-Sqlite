@@ -7,7 +7,7 @@ using CK.Setup;
 namespace CK.Testing.SqliteDBSetup
 {
     /// <summary>
-    /// SQLite DBSetup core helper exposes the <see cref="GenerateSourceFiles"/> property and
+    /// SQLite DBSetup core helper exposes the <see cref="SqliteDatabaseIsTemporarySqliteDatabase"/> property and
     /// the <see cref="RunSqliteSetup"/> method.
     /// This helper heavily relies on <see cref="CKSetup.ICKSetupTestHelperCore"/>.
     /// </summary>

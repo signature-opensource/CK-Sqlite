@@ -14,7 +14,7 @@ namespace CK.Sqlite.Setup
         /// Initializes a new <see cref="SqlitePackageBaseItem"/> bound to a StObj.
         /// </summary>
         /// <param name="monitor">Monitor to use.</param>
-        /// <param name="data">Structured Object data that contains the <see cref="Object"/>.</param>
+        /// <param name="data">Structured Object data that contains the <see cref="ActualObject"/>.</param>
         public SqlitePackageBaseItem( IActivityMonitor monitor, IStObjSetupData data )
             : base( monitor, data )
         {

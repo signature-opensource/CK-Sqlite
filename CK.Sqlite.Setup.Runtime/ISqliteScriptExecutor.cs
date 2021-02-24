@@ -27,7 +27,7 @@ namespace CK.Sqlite
         /// <summary>
         /// Executes multiple scripts.
         /// </summary>
-        /// <param name="this">This <see cref="ISqlScriptExecutor"/>.</param>
+        /// <param name="this">This <see cref="ISqliteScriptExecutor"/>.</param>
         /// <param name="scripts">A set of scripts.</param>
         /// <param name="stopOnError">False to continue execution regardless of a script failure.</param>
         /// <returns>The number of script that failed.</returns>
