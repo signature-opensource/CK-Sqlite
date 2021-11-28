@@ -24,7 +24,7 @@ namespace CK.Sqlite.Setup
         protected new SqlitePackageAttribute Attribute => (SqlitePackageAttribute)base.Attribute;
 
         /// <summary>
-        /// Transfers <see cref="SqlPackageAttribute.HasModel"/> to "HasModel" stobj property.
+        /// Transfers <see cref="SqlitePackageAttribute.HasModel"/> to "HasModel" stobj property.
         /// </summary>
         /// <param name="monitor">The monitor to use.</param>
         /// <param name="o">The configured object.</param>

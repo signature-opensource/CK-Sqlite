@@ -229,7 +229,6 @@ namespace CK.Sqlite.Setup
         /// The script is traced (if <paramref name="monitor"/> is not null).
         /// </summary>
         /// <param name="monitor">The monitor to use. Null to not log anything (and throw exception on error).</param>
-        /// <param name="checkTransactionCount">By default, transaction count is checked: it must be the same before and after the execution.</param>
         /// <param name="autoRestoreDatabase">By default, if the script USE another database, the initial one is automatically restored.</param>
         public ISqliteScriptExecutor CreateExecutor( IActivityMonitor monitor, bool autoRestoreDatabase = true )
         {
@@ -315,7 +314,7 @@ namespace CK.Sqlite.Setup
         /// <summary>
         /// Executes the command and returns the first row as an array of object values.
         /// </summary>
-        /// <param name="cmd">The <see cref="SqlCommand"/> to execute.</param>
+        /// <param name="cmd">The <see cref="SqliteCommand"/> to execute.</param>
         /// <returns>An array of objects or null if nothing has been returned from database.</returns>
         public object[] ReadFirstRow( SqliteCommand cmd )
         {

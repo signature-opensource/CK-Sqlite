@@ -6,9 +6,8 @@ using Microsoft.Data.Sqlite;
 namespace CK.Sqlite.Setup
 {
     /// <summary>
-    /// Sql Server based memory provider for the setup.
-    /// It is used by <see cref="SqlScriptExecutor"/> (created by <see cref="SqlScriptTypeHandler"/>)
-    /// to skip already executed scripts.
+    /// Sqlite based memory provider for the setup.
+    /// It is used to skip already executed scripts.
     /// </summary>
     public class SqliteSetupSessionMemoryProvider : ISetupSessionMemoryProvider, ISetupSessionMemory
     {
@@ -32,7 +31,7 @@ namespace CK.Sqlite.Setup
         public int StartCount { get; private set; }
 
         /// <summary>
-        /// Gets a description of the last ok (set by <see cref="StopSetup"/>).
+        /// Gets a description of the last failure (set by <see cref="StopSetup"/>).
         /// </summary>
         public string LastError { get; private set; }
 

@@ -1,10 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <Import Project="..\Common\Shared.props" />
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp3.1</TargetFrameworks>
+    <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="CK.Testing.SetupableSetup" Version="0.0.0--02wtc6l-local+v14.0.1" />
+    <PackageReference Include="CK.Testing.SetupableSetup" Version="18.0.0" />
     <ProjectReference Include="../CK.Sqlite.Setup.Model/CK.Sqlite.Setup.Model.csproj" />
   </ItemGroup>
 </Project>

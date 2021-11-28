@@ -7,7 +7,7 @@ using CK.Core;
 namespace CK.Sqlite
 {
     /// <summary>
-    /// Attribute that must decorate a <see cref="SqlTable"/> class.
+    /// Attribute that must decorate a <see cref="SqliteTable"/> class.
     /// </summary>
     [AttributeUsage( AttributeTargets.Class, AllowMultiple = true, Inherited = false )]
     public class SqliteTableAttribute : SqlitePackageAttributeBase

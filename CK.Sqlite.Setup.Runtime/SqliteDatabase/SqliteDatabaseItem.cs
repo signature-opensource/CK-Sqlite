@@ -61,7 +61,7 @@ namespace CK.Sqlite.Setup
         }
 
         /// <summary>
-        /// >Initializes a new <see cref="SqlDatabaseItem"/>.
+        /// >Initializes a new <see cref="SqliteDatabaseItem"/>.
         /// </summary>
         /// <param name="monitor">The monitor to use.</param>
         /// <param name="data">The setup data from actual object.</param>
@@ -76,7 +76,7 @@ namespace CK.Sqlite.Setup
         }
 
         /// <summary>
-        /// Masked to return a <see cref="SqlDatabase"/>.
+        /// Masked to return a <see cref="SqliteDatabase"/>.
         /// </summary>
         public new SqliteDatabase ActualObject => (SqliteDatabase)base.ActualObject;
 

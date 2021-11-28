@@ -16,7 +16,7 @@ namespace CK.Sqlite
     {
         /// <summary>
         /// Gets or sets the database to which this package belongs.
-        /// Typically initialized by an attribute (like <see cref="SqlPackageAttribute"/>).
+        /// Typically initialized by an attribute (like <see cref="SqlitePackageAttribute"/>).
         /// </summary>
         [AmbientProperty]
         public SqliteDatabase Database { get; set; }
