@@ -17,7 +17,7 @@ namespace CodeCake
         {
             return new CKSetupComponent[]{
 
-new CKSetupComponent( "CK.Sqlite.Setup.Model", "netstandard2.1" ),
+new CKSetupComponent( "CK.Sqlite.Setup.Model", "net6.0" ),
 new CKSetupComponent( "CK.Sqlite.Setup.Runtime", "net6.0" )
 };
         }
