@@ -1,13 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using Microsoft.Data.SqlClient;
 using System.Linq;
 using CK.Core;
 using CK.Setup;
 using System.Diagnostics;
 using Microsoft.Data.Sqlite;
-using CK.Text;
 
 namespace CK.Sqlite.Setup
 {

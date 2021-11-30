@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <Description>CK-Database Runtime and Engine provider for SQLite.</Description>
+    <Nullable>annotations</Nullable>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="CK.Setupable.Runtime" Version="0.0.0--03lwn66-local" />

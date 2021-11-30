@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
-using Microsoft.Data.SqlClient;
 using System.Diagnostics;
 using System.IO;
 using System.Text.RegularExpressions;
@@ -136,7 +135,7 @@ namespace CK.Sqlite.Setup
         {
             readonly SqliteManager _manager;
             readonly SqliteCommand _command;
-            readonly IActivityMonitor _monitor;
+            readonly IActivityMonitor? _monitor;
             readonly string _databaseName;
 
             /// <summary>
@@ -171,15 +170,7 @@ namespace CK.Sqlite.Setup
                     if( script.Length > 0 )
                     {
                         _command.CommandText = script;
-                        if( _monitor != null )
-                        {
-                            hasBeenTraced = _monitor.ShouldLogLine( LogLevel.Trace );
-                            if( hasBeenTraced )
-                            {
-                                _monitor.UnfilteredLog( ActivityMonitor.Tags.Empty, LogLevel.Trace | LogLevel.IsFiltered, script, _monitor.NextLogTime(), null );
-                                _monitor.UnfilteredLog( ActivityMonitor.Tags.Empty, LogLevel.Trace | LogLevel.IsFiltered, "GO", _monitor.NextLogTime(), null );
-                            }
-                        }
+                        if( _monitor != null ) hasBeenTraced = _monitor.Trace( script );
                         _command.ExecuteNonQuery();
                     }
                     LastSucceed = true;
@@ -246,7 +237,7 @@ namespace CK.Sqlite.Setup
         /// will be thrown in case of failure. 
         /// If a monitor is set, this method will return true or false to indicate success.
         /// </returns>
-        public bool ExecuteScripts( IEnumerable<string> scripts, IActivityMonitor monitor )
+        public bool ExecuteScripts( IEnumerable<string> scripts, IActivityMonitor? monitor )
         {
             using( var e = CreateExecutor( monitor ) )
             {
@@ -272,7 +263,7 @@ namespace CK.Sqlite.Setup
         /// any script and guaranty that, at the beginning of a script, we always are on the 
         /// same configured database.
         /// </remarks>
-        public bool ExecuteOneScript( string script, IActivityMonitor monitor = null )
+        public bool ExecuteOneScript( string script, IActivityMonitor? monitor = null )
         {
             using( var e = CreateExecutor( monitor ) )
             {

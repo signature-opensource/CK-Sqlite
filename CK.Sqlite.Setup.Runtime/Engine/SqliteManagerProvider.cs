@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using CK.Core;
 using System.Diagnostics;
-using Microsoft.Data.SqlClient;
 
 namespace CK.Sqlite.Setup
 {
