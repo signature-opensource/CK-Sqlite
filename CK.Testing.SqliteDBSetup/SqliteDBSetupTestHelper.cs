@@ -9,7 +9,6 @@ using CK.Setup;
 using CK.Sqlite;
 using CK.Testing.CKSetup;
 using CK.Testing.SqliteDBSetup;
-using CK.Text;
 using CKSetup;
 
 namespace CK.Testing
