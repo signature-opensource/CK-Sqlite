@@ -4,7 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="CK.Testing.SetupableSetup" Version="19.0.0-r00-00-0003-develop" />
+    <PackageReference Include="CK.Testing.SetupableSetup" Version="19.0.0-r00-00-0004-develop" />
     <ProjectReference Include="../CK.Sqlite.Setup.Model/CK.Sqlite.Setup.Model.csproj" />
   </ItemGroup>
 </Project>
