@@ -6,7 +6,7 @@
     <Nullable>annotations</Nullable>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="CK.Setupable.Runtime" Version="19.0.0-r04-00-0001-develop" />
+    <PackageReference Include="CK.Setupable.Runtime" Version="19.0.0-r04-00-0002-develop" />
     <PackageReference Include="Yodii.Script" Version="0.8.2--0021-develop" />
   </ItemGroup>
   <ItemGroup>
