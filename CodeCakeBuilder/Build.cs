@@ -17,7 +17,6 @@ using Cake.Common.Tools.NUnit;
 using Cake.Core;
 using Cake.Core.Diagnostics;
 using Cake.Core.IO;
-using CK.Text;
 using Code.Cake;
 using SimpleGitVersion;
 using System;
