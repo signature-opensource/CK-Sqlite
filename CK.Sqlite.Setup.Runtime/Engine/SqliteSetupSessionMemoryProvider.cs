@@ -64,7 +64,7 @@ namespace CK.Sqlite.Setup
                 var existing = _manager.ReadFirstRow( cRead );
                 
                 LastStartDate = SqliteHelper.ReadDateTimeFromSqliteValue(existing[0]).Value;
-                if( LastStartDate == Util.UnixEpoch) LastStartDate = DateTime.MinValue;
+                if( LastStartDate == DateTime.UnixEpoch) LastStartDate = Util.UtcMinValue;
 
                 StartCount = Convert.ToInt32( (long)existing[1] );
 
