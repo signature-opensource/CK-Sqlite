@@ -1,18 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
-  <Import Project="..\..\Common\Shared.props" />
-
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <IsPackable>False</IsPackable>
   </PropertyGroup>
-  
   <ItemGroup>
     <EmbeddedResource Include="**\*.sql" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\..\CK.Sqlite.Setup.Model\CK.Sqlite.Setup.Model.csproj" />
   </ItemGroup>
-
 </Project>
