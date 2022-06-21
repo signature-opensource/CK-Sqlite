@@ -1,4 +1,4 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30320.27
@@ -8,9 +8,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 		.gitignore = .gitignore
 		appveyor.yml = appveyor.yml
-		nuget.config = nuget.config
+		NuGet.config = NuGet.config
 		RepositoryInfo.xml = RepositoryInfo.xml
-		Common\Shared.props = Common\Shared.props
+		Directory.Build.props = Directory.Build.props
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CK.Sqlite.Setup.Model", "CK.Sqlite.Setup.Model\CK.Sqlite.Setup.Model.csproj", "{5758A3C9-3259-4A5C-8201-8EB679C8F766}"
@@ -18,6 +18,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CK.Sqlite.Setup.Runtime", "CK.Sqlite.Setup.Runtime\CK.Sqlite.Setup.Runtime.csproj", "{5223BB58-9460-475D-9FE4-8A23186B688B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{E41EE025-81BA-44EC-899A-4B0E1D2190DB}"
+	ProjectSection(SolutionItems) = preProject
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CK.Sqlite.Tests", "Tests\CK.Sqlite.Tests\CK.Sqlite.Tests.csproj", "{87995CBF-EFC2-464E-8BD6-E2977E8FC496}"
 EndProject

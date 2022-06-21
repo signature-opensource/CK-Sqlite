@@ -274,3 +274,4 @@ $StObjGen/
 
 CodeCakeBuilder/[Rr]elease/
 CodeCakeBuilder/[Rr]eleases/
+/Tests/CK.Sqlite.Tests/LocalTestStore/
