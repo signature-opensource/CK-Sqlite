@@ -22,7 +22,7 @@ namespace CK.Testing
         readonly string _defaultConnectionString;
         readonly TemporarySqliteDatabase _tempDB;
 
-        internal SqliteDBSetupTestHelper( ITestHelperConfiguration config, ISetupableSetupTestHelper setupableSetup )
+        internal SqliteDBSetupTestHelper( TestHelperConfiguration config, ISetupableSetupTestHelper setupableSetup )
         {
             _setupableSetup = setupableSetup;
             _setupableSetup.StObjSetupRunning += OnStObjSetupRunning;
@@ -63,7 +63,7 @@ namespace CK.Testing
             {
                 try
                 {
-                    var (Configuration, ForceSetup) = StObjSetupTestHelper.CreateDefaultConfiguration( _setupableSetup );
+                    var (Configuration, ForceSetup) = StObjSetupTestHelper.CreateDefaultConfiguration( _setupableSetup.Monitor, _setupableSetup );
                     Debug.Assert( Configuration.BinPaths.Count > 0 && Configuration.BinPaths[0].CompileOption == CompileOption.Compile );
 
                     Configuration.RevertOrderingNames = revertNames;
