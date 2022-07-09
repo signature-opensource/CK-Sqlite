@@ -26,13 +26,17 @@ namespace CK.Testing
         {
             _setupableSetup = setupableSetup;
             _setupableSetup.StObjSetupRunning += OnStObjSetupRunning;
-            var c = config.Get( "Sqllite/DefaultConnectionString", null );
-            if( c == null )
+            var c = config.Declare( "Sqllite/DefaultConnectionString", "Connection string to use. By default a temporary database is created. ", null );
+            if( c.ConfiguredValue == null )
             {
                 _tempDB = new TemporarySqliteDatabase();
-                c = _tempDB.ConnectionString;
+                c.SetDefaultValue( _tempDB.ConnectionString );
+                _defaultConnectionString = _tempDB.ConnectionString;
             }
-            _defaultConnectionString = c;
+            else
+            {
+                _defaultConnectionString = c.ConfiguredValue;
+            }
         }
 
         void OnStObjSetupRunning( object sender, StObjSetup.StObjSetupRunningEventArgs e )
