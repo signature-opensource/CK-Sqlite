@@ -33,7 +33,10 @@ namespace CK.Testing.SqliteDBSetup
         /// <param name="traceSetupGraphOrdering">True to trace input and output of setup graph ordering.</param>
         /// <param name="revertNames">True to revert names in ordering.</param>
         /// <returns>The setup result: succeed, failed or up-to-date.</returns>
-        CKSetupRunResult RunSqliteSetup( string connectionString = null, bool traceStObjGraphOrdering = false, bool traceSetupGraphOrdering = false, bool revertNames = false );
+        CKSetupRunResult RunSqliteSetup( string connectionString = null,
+                                         bool traceStObjGraphOrdering = false,
+                                         bool traceSetupGraphOrdering = false,
+                                         bool revertNames = false );
 
     }
 }
