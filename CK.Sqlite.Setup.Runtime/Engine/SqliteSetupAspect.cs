@@ -94,12 +94,17 @@ namespace CK.Sqlite.Setup
             return true;
         }
 
-        bool IStObjEngineAspect.RunPreCode(CK.Core.IActivityMonitor monitor, CK.Setup.IStObjEngineRunContext context)
+        bool IStObjEngineAspect.OnSkippedRun( IActivityMonitor monitor )
         {
             return true;
         }
 
-        bool IStObjEngineAspect.RunPostCode( CK.Core.IActivityMonitor monitor, CK.Setup.IStObjEnginePostCodeRunContext context )
+        bool IStObjEngineAspect.RunPreCode( IActivityMonitor monitor, IStObjEngineRunContext context)
+        {
+            return true;
+        }
+
+        bool IStObjEngineAspect.RunPostCode( IActivityMonitor monitor, IStObjEnginePostCodeRunContext context )
         {
             return true;
         }

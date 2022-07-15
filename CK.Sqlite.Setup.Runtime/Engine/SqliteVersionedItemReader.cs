@@ -19,11 +19,13 @@ namespace CK.Sqlite.Setup
         /// </summary>
         public static int CurrentVersion { get; } = 1;
 
+        SHA1Value? _runSignature;
         bool _initialized;
 
         public SqliteVersionedItemReader( ISqliteManager manager )
         {
-            Manager = manager ?? throw new ArgumentNullException( "manager" );
+            Throw.CheckNotNullArgument( manager );
+            Manager = manager;
         }
 
         internal readonly ISqliteManager Manager;
@@ -34,6 +36,25 @@ namespace CK.Sqlite.Setup
             {
                 m.ExecuteNonQuery( CreateVersionTableScript );
             }
+        }
+
+        public SHA1Value GetSignature( IActivityMonitor monitor )
+        {
+            if( !_runSignature.HasValue )
+            {
+                _runSignature = SHA1Value.Zero;
+                if( Manager.ExecuteScalar( "SELECT 1 FROM sqlite_master WHERE type='table' AND name='CKCore_tItemVersionStore';" ) == null )
+                {
+                    var s = (string)Manager.ExecuteScalar( "SELECT ItemVersion FROM CKCore_tItemVersionStore WHERE FullName='RunSignature';" );
+                    if( s != null )
+                    {
+                        _ = SHA1Value.TryParse( s, out var v );
+                        _runSignature = v;
+                    }
+                }
+                monitor.Trace( $"Current Sqlite database RunSignature: '{_runSignature.Value}'." );
+            }
+            return _runSignature.Value;
         }
 
         public OriginalReadInfo GetOriginalVersions( IActivityMonitor monitor )
