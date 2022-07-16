@@ -22,17 +22,21 @@ namespace CK.Testing
         readonly string _defaultConnectionString;
         readonly TemporarySqliteDatabase _tempDB;
 
-        internal SqliteDBSetupTestHelper( ITestHelperConfiguration config, ISetupableSetupTestHelper setupableSetup )
+        internal SqliteDBSetupTestHelper( TestHelperConfiguration config, ISetupableSetupTestHelper setupableSetup )
         {
             _setupableSetup = setupableSetup;
             _setupableSetup.StObjSetupRunning += OnStObjSetupRunning;
-            var c = config.Get( "Sqllite/DefaultConnectionString", null );
-            if( c == null )
+            var c = config.Declare( "Sqllite/DefaultConnectionString", "Connection string to use. By default a temporary database is created. ", null );
+            if( c.ConfiguredValue == null )
             {
                 _tempDB = new TemporarySqliteDatabase();
-                c = _tempDB.ConnectionString;
+                c.SetDefaultValue( _tempDB.ConnectionString );
+                _defaultConnectionString = _tempDB.ConnectionString;
             }
-            _defaultConnectionString = c;
+            else
+            {
+                _defaultConnectionString = c.ConfiguredValue;
+            }
         }
 
         void OnStObjSetupRunning( object sender, StObjSetup.StObjSetupRunningEventArgs e )
@@ -63,7 +67,7 @@ namespace CK.Testing
             {
                 try
                 {
-                    var (Configuration, ForceSetup) = StObjSetupTestHelper.CreateDefaultConfiguration( _setupableSetup );
+                    var (Configuration, ForceSetup) = StObjSetupTestHelper.CreateDefaultConfiguration( _setupableSetup.Monitor, _setupableSetup );
                     Debug.Assert( Configuration.BinPaths.Count > 0 && Configuration.BinPaths[0].CompileOption == CompileOption.Compile );
 
                     Configuration.RevertOrderingNames = revertNames;

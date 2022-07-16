@@ -94,9 +94,25 @@ namespace CK.Sqlite.Setup
             return true;
         }
 
-        bool IStObjEngineAspect.Run( IActivityMonitor monitor, IStObjEngineRunContext context ) => true;
+        bool IStObjEngineAspect.OnSkippedRun( IActivityMonitor monitor )
+        {
+            return true;
+        }
 
-        bool IStObjEngineAspect.Terminate( IActivityMonitor monitor, IStObjEngineTerminateContext context ) => true;
+        bool IStObjEngineAspect.RunPreCode( IActivityMonitor monitor, IStObjEngineRunContext context)
+        {
+            return true;
+        }
+
+        bool IStObjEngineAspect.RunPostCode( IActivityMonitor monitor, IStObjEnginePostCodeRunContext context )
+        {
+            return true;
+        }
+
+        bool IStObjEngineAspect.Terminate( IActivityMonitor monitor, IStObjEngineTerminateContext context )
+        {
+            return true;
+        }
 
         /// <summary>
         /// Gets the configuration object.
