@@ -5,8 +5,8 @@
     <Nullable>annotations</Nullable>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="CK.Setupable.Runtime" Version="22.0.2--0007-develop" />
-    <PackageReference Include="Yodii.Script" Version="0.8.2--0033-develop" />
+    <PackageReference Include="CK.Setupable.Runtime" Version="22.1.0" />
+    <PackageReference Include="Yodii.Script" Version="0.8.1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CK.Sqlite.Setup.Model\CK.Sqlite.Setup.Model.csproj" />
