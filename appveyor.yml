@@ -1,10 +1,6 @@
 version: build{build}
 image: Visual Studio 2022
 clone_folder: C:\CKli-World\CK-Database-Projects\CK-Sqlite
-branches:
-  only:
-  - master
-  - develop
 environment:
   CKSETUPREMOTESTORE_PUSH_API_KEY:
     secure: ffSyq7zhajO1GUXQraZnZiZGtrPjUMGXXhlS71JUDouxx43VgzbtRfqmZM6zKTmS
