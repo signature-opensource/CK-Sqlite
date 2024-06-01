@@ -9,7 +9,7 @@ namespace CK.Setup
     /// <summary>
     /// Aspect configuration object.
     /// </summary>
-    public class SqliteSetupAspectConfiguration : IStObjEngineAspectConfiguration
+    public class SqliteSetupAspectConfiguration : EngineAspectConfiguration
     {
         /// <summary>
         /// Default database name is "sqlite".
@@ -46,7 +46,7 @@ namespace CK.Setup
         /// </summary>
         /// <param name="e">The element to populate.</param>
         /// <returns>The <paramref name="e"/> element.</returns>
-        public XElement SerializeXml( XElement e )
+        public override XElement SerializeXml( XElement e )
         {
             e.Add( new XElement( xDatabases, _databases.Select( d => d.Serialize( new XElement( xDatabase ) ) ) ),
                    new XElement( xDefaultDatabaseConnectionString, DefaultDatabaseConnectionString ) );
@@ -76,7 +76,7 @@ namespace CK.Setup
             return null;
         }
 
-        string IStObjEngineAspectConfiguration.AspectType => "CK.Sqlite.Setup.SqliteSetupAspect, CK.Sqlite.Setup.Runtime";
+        public override string AspectType => "CK.Sqlite.Setup.SqliteSetupAspect, CK.Sqlite.Setup.Runtime";
 
 
     }
