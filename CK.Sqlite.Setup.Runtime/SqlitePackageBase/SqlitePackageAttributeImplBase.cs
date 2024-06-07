@@ -54,7 +54,7 @@ namespace CK.Sqlite.Setup
             }
             else o.SetAmbientPropertyConfiguration( monitor, "Database", typeof( SqliteDefaultDatabase ), StObjRequirementBehavior.WarnIfNotStObj );
             // ResourceLocation is a StObjProperty.
-            o.SetStObjPropertyValue( monitor, "ResourceLocation", new ResourceLocator( Attribute.ResourceType, Attribute.ResourcePath, o.ClassType ) );
+            o.SetStObjPropertyValue( monitor, "ResourceLocation", new ResourceLocator( Attribute.ResourceType ?? o.ClassType, Attribute.ResourcePath ) );
 
             ConfigureMutableItem( monitor, o );
         }
