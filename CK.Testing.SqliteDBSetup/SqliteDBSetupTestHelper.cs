@@ -41,13 +41,13 @@ namespace CK.Testing
 
         void OnStObjSetupRunning( object sender, StObjSetup.StObjSetupRunningEventArgs e )
         {
-            if( !e.StObjEngineConfiguration.Aspects.Any( c => c is SqliteSetupAspectConfiguration ) )
+            if( !e.EngineConfiguration.Aspects.Any( c => c is SqliteSetupAspectConfiguration ) )
             {
                 _setupableSetup.Monitor.Info( $"Adding SqliteSetupAspectConfiguration to StObjEngineConfiguration on connection string {_defaultConnectionString}." );
                 var conf = new SqliteSetupAspectConfiguration();
                 conf.DefaultDatabaseConnectionString = _defaultConnectionString;
 
-                e.StObjEngineConfiguration.Aspects.Add( conf );
+                e.EngineConfiguration.AddAspect( conf );
             }
         }
 
@@ -78,11 +78,11 @@ namespace CK.Testing
                     setupable.RevertOrderingNames = revertNames;
                     setupable.TraceDependencySorterInput = traceSetupGraphOrdering;
                     setupable.TraceDependencySorterOutput = traceSetupGraphOrdering;
-                    Configuration.Aspects.Add( setupable );
+                    Configuration.AddAspect( setupable );
 
                     var sqlite = new SqliteSetupAspectConfiguration();
                     sqlite.DefaultDatabaseConnectionString = connectionString;
-                    Configuration.Aspects.Add( sqlite );
+                    Configuration.AddAspect( sqlite );
 
                     return _setupableSetup.RunStObjSetup( Configuration, ForceSetup );
                 }

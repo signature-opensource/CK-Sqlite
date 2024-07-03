@@ -66,7 +66,7 @@ namespace CK.Sqlite.Setup
                 AutoInitialize( Manager );
                 _initialized = true;
             }
-            using( var c = new SqliteCommand( "select FullName, ItemType, ItemVersion from CKCore_tItemVersionStore where FullName <> 'CK.SqlVersionedItemRepository'" ) { Connection = Manager.Connection } )
+            using( var c = new SqliteCommand( "select FullName, ItemType, ItemVersion from CKCore_tItemVersionStore where FullName <> 'CK.SqlVersionedItemRepository' and FullName <> 'RunSignature'" ) { Connection = Manager.Connection } )
             using( var r = c.ExecuteReader() )
             {
                 while( r.Read() )
@@ -74,7 +74,7 @@ namespace CK.Sqlite.Setup
                     string fullName = r.GetString( 0 );
                     string itemType = r.GetString( 1 );
                     if( itemType == "VFeature" ) features.Add( new VFeature( fullName, CSemVer.SVersion.Parse( r.GetString( 2 ) ) ) );
-                    else items.Add( new VersionedTypedName( fullName, itemType, Version.Parse(  r.GetString( 2 ) ) ) );
+                    else items.Add( new VersionedTypedName( fullName, itemType, Version.Parse( r.GetString( 2 ) ) ) );
                 }
             }
             monitor.Trace( $"Existing VFeatures: {features.Select( f => f.ToString() ).Concatenate()}" );

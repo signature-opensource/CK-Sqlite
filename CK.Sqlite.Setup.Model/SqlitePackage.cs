@@ -9,7 +9,7 @@ namespace CK.Sqlite
     /// <summary>
     /// Base class for actual packages and <see cref="SqlTable"/>.
     /// </summary>
-    [StObj( ItemKind = DependentItemKindSpec.Container )]
+    [RealObject( ItemKind = DependentItemKindSpec.Container )]
     [StObjProperty( PropertyName = "ResourceLocation", PropertyType = typeof( IResourceLocator ) )]
     [CKTypeDefiner]
     public class SqlitePackage : ISqliteConnectionStringProvider, IRealObject
