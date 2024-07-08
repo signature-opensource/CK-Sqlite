@@ -3,7 +3,7 @@
     <TargetFramework>net8.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="CK.Testing.SetupableSetup" Version="0.0.0--04ytpj0-develop" />
+    <PackageReference Include="CK.Testing.SetupableSetup" Version="0.0.0--04ytqpq-develop" />
     <ProjectReference Include="../CK.Sqlite.Setup.Model/CK.Sqlite.Setup.Model.csproj" />
   </ItemGroup>
 </Project>
