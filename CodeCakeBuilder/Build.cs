@@ -58,14 +58,6 @@ namespace CodeCake
                     globalInfo.GetDotnetSolution().Pack();
                  } );
 
-            Task( "Push-Runtimes-and-Engines" )
-                .IsDependentOn( "Unit-Testing" )
-                .WithCriteria( () => globalInfo.IsValid )
-                .Does( () =>
-                {
-                    StandardPushCKSetupComponents( globalInfo );
-                } );
-
             Task( "Push-NuGet-Packages" )
                 .IsDependentOn( "Create-All-NuGet-Packages" )
                 .WithCriteria( () => globalInfo.IsValid )
@@ -76,8 +68,7 @@ namespace CodeCake
 
             // The Default task for this script can be set here.
             Task( "Default" )
-                .IsDependentOn( "Push-NuGet-Packages" )
-                .IsDependentOn( "Push-Runtimes-and-Engines" );
+                .IsDependentOn( "Push-NuGet-Packages" );
         }
 
     }
