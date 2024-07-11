@@ -8,16 +8,16 @@ namespace CK.Sqlite.Setup
 {
     public class SqliteSetupAspect : IStObjEngineAspect, ISqliteSetupAspect, IDisposable
     {
-        readonly SqliteSetupAspectConfiguration _config;
+        readonly SqliteAspectConfiguration _config;
         readonly ISetupableAspectRunConfiguration _setupConfiguration;
         readonly SqliteManagerProvider _databases;
         ISqliteManagerBase _defaultDatabase;
 
         class StObjConfiguratorHook : StObjConfigurationLayer
         {
-            readonly SqliteSetupAspectConfiguration _config;
+            readonly SqliteAspectConfiguration _config;
 
-            public StObjConfiguratorHook( SqliteSetupAspectConfiguration config )
+            public StObjConfiguratorHook( SqliteAspectConfiguration config )
             {
                 _config = config;
             }
@@ -35,16 +35,16 @@ namespace CK.Sqlite.Setup
 
         /// <summary>
         /// Initializes a new <see cref="SqliteSetupAspect"/>.
-        /// This constructor is called by the StObjEngine whenever a <see cref="SqliteSetupAspectConfiguration"/> configuration object
-        /// appears in <see cref="StObjEngineConfiguration.Aspects"/> list.
+        /// This constructor is called by the StObjEngine whenever a <see cref="SqliteAspectConfiguration"/> configuration object
+        /// appears in <see cref="EngineConfiguration.Aspects"/> list.
         /// </summary>
         /// <param name="config">Configuration object.</param>
         /// <param name="monitor">Monitor to use.</param>
         /// <param name="setupConfiguration"></param>
-        public SqliteSetupAspect( SqliteSetupAspectConfiguration config, IActivityMonitor monitor, ConfigureOnly<ISetupableAspectRunConfiguration> setupConfiguration )
+        public SqliteSetupAspect( SqliteAspectConfiguration config, IActivityMonitor monitor, ConfigureOnly<ISetupableAspectRunConfiguration> setupConfiguration )
         {
-            if( setupConfiguration.Service == null ) throw new ArgumentNullException( nameof( setupConfiguration ) );
-            if( config == null ) throw new ArgumentNullException( nameof( config ) );
+            Throw.CheckArgument( setupConfiguration.Service is not null );
+            Throw.CheckNotNullArgument( config );
             _config = config;
             _setupConfiguration = setupConfiguration.Service;
             _databases = new SqliteManagerProvider( monitor );
@@ -53,12 +53,12 @@ namespace CK.Sqlite.Setup
             {
                 _databases.Add( db.LogicalDatabaseName, db.ConnectionString );
             }
+            _defaultDatabase = _databases.FindManagerByName( SqliteDatabase.DefaultDatabaseName );
         }
 
         bool IStObjEngineAspect.Configure( IActivityMonitor monitor, IStObjEngineConfigureContext context )
         {
-            _defaultDatabase = _databases.FindManagerByName( SqliteDatabase.DefaultDatabaseName );
-            ISqliteManager realSqlManager = _defaultDatabase as ISqliteManager;
+            ISqliteManager? realSqlManager = _defaultDatabase as ISqliteManager;
             if( !context.ServiceContainer.IsAvailable<IVersionedItemReader>() )
             {
                 if( realSqlManager != null )
@@ -117,7 +117,7 @@ namespace CK.Sqlite.Setup
         /// <summary>
         /// Gets the configuration object.
         /// </summary>
-        public SqliteSetupAspectConfiguration Configuration => _config;
+        public SqliteAspectConfiguration Configuration => _config;
 
         /// <summary>
         /// Gets the default database as a <see cref="ISqliteManagerBase"/> object.
@@ -126,7 +126,7 @@ namespace CK.Sqlite.Setup
 
         /// <summary>
         /// Gets the available databases (including the <see cref="DefaultSqliteDatabase"/>).
-        /// It is initialized with <see cref="SqliteSetupAspectConfiguration.Databases"/> content.
+        /// It is initialized with <see cref="SqliteAspectConfiguration.Databases"/> content.
         /// </summary>
         public ISqliteManagerProvider SqliteDatabases => _databases;
 

@@ -16,7 +16,7 @@ namespace CK.Sqlite.Setup
     public class SqliteManager : ISqliteManager
     {
         readonly IActivityMonitor _monitor;
-        SqliteConnection _oCon;
+        SqliteConnection? _oCon;
         bool _ckCoreInstalled;
 
         /// <summary>
@@ -24,14 +24,14 @@ namespace CK.Sqlite.Setup
         /// </summary>
         public SqliteManager( IActivityMonitor monitor )
         {
-            if( monitor == null ) throw new ArgumentNullException( "monitor" );
+            Throw.CheckNotNullArgument( monitor );
             _monitor = monitor;
         }
 
         /// <summary>
         /// Gets the <see cref="SqliteConnection"/> of this manager.
         /// </summary>
-        public SqliteConnection Connection => _oCon;
+        public SqliteConnection? Connection => _oCon;
 
         void IDisposable.Dispose() => Close();
 
@@ -122,7 +122,7 @@ namespace CK.Sqlite.Setup
         /// <returns>True on success.</returns>
         public bool EnsureCKCoreIsInstalled( IActivityMonitor monitor )
         {
-            if( monitor == null ) throw new ArgumentNullException( "monitor" );
+            Throw.CheckNotNullArgument( monitor );
             CheckOpen();
             if( !_ckCoreInstalled )
             {
@@ -161,7 +161,7 @@ namespace CK.Sqlite.Setup
 
             public bool Execute( string script )
             {
-                if( script == null ) throw new ArgumentNullException( "script" );
+                Throw.CheckNotNullArgument( script );
                 LastSucceed = false;
                 bool hasBeenTraced = false;
                 try

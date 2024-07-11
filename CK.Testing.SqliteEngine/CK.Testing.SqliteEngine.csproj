@@ -1,12 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <IsPackable>False</IsPackable>
   </PropertyGroup>
   <ItemGroup>
-    <EmbeddedResource Include="**\*.sql" />
+    <PackageReference Include="CK.Testing.StObjEngine" Version="0.0.0--04yy55n-develop" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\CK.Sqlite.Model\CK.Sqlite.Model.csproj" />
+    <ProjectReference Include="..\CK.Sqlite.Engine\CK.Sqlite.Engine.csproj" />
   </ItemGroup>
 </Project>

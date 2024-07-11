@@ -82,26 +82,9 @@ namespace CK.Sqlite.Setup
         }
 
 
-        public VersionedName OnVersionNotFound( IVersionedItem item, Func<string, VersionedTypedName> originalVersions )
-        {
-            // Maps "Model.XXX" to "XXX" versions for default context and database.
-            if( item.FullName.StartsWith( "[]db^Model.", StringComparison.Ordinal ) )
-            {
-                return originalVersions( "[]db^" + item.FullName.Substring( 11 ) );
-            }
-            return null;
-        }
+        public VersionedName? OnVersionNotFound( IVersionedItem item, Func<string, VersionedTypedName> originalVersions ) => null;
 
-        public VersionedName OnPreviousVersionNotFound( IVersionedItem item, VersionedName prevVersion, Func<string, VersionedTypedName> originalVersions )
-        {
-            // Maps "Model.XXX" to "XXX" versions for default context and database.
-            if( prevVersion.FullName.StartsWith( "[]db^Model.", StringComparison.Ordinal ) )
-            {
-                return originalVersions( "[]db^" + prevVersion.FullName.Substring( 11 ) );
-            }
-            // Old code: Handle non-prefixed FullName when not found.
-            return null;
-        }
+        public VersionedName? OnPreviousVersionNotFound( IVersionedItem item, VersionedName prevVersion, Func<string, VersionedTypedName> originalVersions ) => null;
 
         internal static string CreateTemporaryTableScript = @"
 pragma temp_store = MEMORY;
@@ -114,7 +97,7 @@ create temporary table if not exists TMP_T
 ";
 
         internal static string MergeTemporaryTableScript = @"
-insert or replace into CKCore_tItemVersionStore( FullName, ItemType, ItemVersion ) select F, V, T from TMP_T;";
+insert or replace into CKCore_tItemVersionStore( FullName, ItemType, ItemVersion ) select F, T, V from TMP_T;";
 
         internal static string CreateVersionTableScript = @"
 create table if not exists CKCore_tItemVersionStore

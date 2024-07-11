@@ -20,7 +20,7 @@ namespace CK.Sqlite.Setup
         /// <returns>True on success.</returns>
         public static bool Install( SqliteManager manager, IActivityMonitor monitor, bool forceInstall = false )
         {
-            if( monitor == null ) throw new ArgumentNullException( "monitor" );
+            Throw.CheckNotNullArgument( monitor );
 
             using( monitor.OpenTrace( "Installing CKCore kernel." ) )
             {

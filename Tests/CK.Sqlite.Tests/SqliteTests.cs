@@ -1,25 +1,26 @@
 using CK.Setup;
-using CKSetup;
+using CK.Testing;
 using FluentAssertions;
 using Microsoft.Data.Sqlite;
 using NUnit.Framework;
 using System;
-using static CK.Testing.SqliteDBSetupTestHelper;
+using static CK.Testing.MonitorTestHelper;
 
 namespace CK.Sqlite.Tests
 {
     [TestFixture]
     public class SqliteTests
     {
-
-
         [Test]
-        public void setup_on_automatic_temporary_database()
+        public void setup_on_default_AppContext_BaseDirectory_database()
         {
-            TestHelper.RunSqliteSetup().Should().Be( CKSetupRunResult.Succeed );
+            var engineConfiguration = TestHelper.CreateDefaultEngineConfiguration();
+            var lite = engineConfiguration.EnsureSqliteConfigurationAspect( connectionString: null );
+            lite.IsDefaultDatabaseConnectionStringConfigured.Should().BeFalse( "Using default AppContext.BaseDirectory 'sqlite' database." );
 
-            using( SqliteConnection conn = new SqliteConnection( TestHelper.SqliteDefaultConnectionString ) )
+            using( SqliteConnection conn = new SqliteConnection( lite.DefaultDatabaseConnectionString ) )
             {
+                engineConfiguration.RunSuccessfully();
                 conn.Open();
                 TestThatLocalPackagesHaveBeenInstalled( conn );
             }
@@ -30,8 +31,9 @@ namespace CK.Sqlite.Tests
         {
             using( var db = new TemporarySqliteDatabase() )
             {
-                TestHelper.RunSqliteSetup( db.ConnectionString )
-                    .Should().Be( CKSetupRunResult.Succeed );
+                var engineConfiguration = TestHelper.CreateDefaultEngineConfiguration();
+                engineConfiguration.EnsureSqliteConfigurationAspect( db.ConnectionString );
+                engineConfiguration.RunSuccessfully();
 
                 using( SqliteConnection conn = new SqliteConnection( db.ConnectionString ) )
                 {

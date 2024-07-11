@@ -17,7 +17,7 @@ namespace CK.Sqlite
         /// </summary>
         /// <param name="tableName">The table name.</param>
         public SqliteTableAttribute( string tableName )
-            : base( "CK.Sqlite.Setup.SqliteTableAttributeImpl, CK.Sqlite.Setup.Runtime" )
+            : base( "CK.Sqlite.Setup.SqliteTableAttributeImpl, CK.Sqlite.Engine" )
         {
             TableName = tableName;
         }

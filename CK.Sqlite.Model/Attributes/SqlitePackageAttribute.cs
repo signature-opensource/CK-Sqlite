@@ -17,7 +17,7 @@ namespace CK.Sqlite
         /// Initializes a new <see cref="SqlitePackageAttribute"/>.
         /// </summary>
         public SqlitePackageAttribute()
-            : base( "CK.Sqlite.Setup.SqlitePackageAttributeImpl, CK.Sqlite.Setup.Runtime" )
+            : base( "CK.Sqlite.Setup.SqlitePackageAttributeImpl, CK.Sqlite.Engine" )
         {
             HasModel = true;
         }

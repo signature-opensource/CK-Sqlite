@@ -19,13 +19,13 @@ namespace CK.Sqlite.Setup
         /// </summary>
         /// <param name="logicalName">Name of the sql connection.</param>
         /// <returns>The manager or null if not found.</returns>
-        ISqliteManagerBase FindManagerByName( string logicalName );
+        ISqliteManagerBase? FindManagerByName( string logicalName );
 
         /// <summary>
         /// Gets an opened, ready to use, <see cref="ISqliteManagerBase"/> by its connection string (null if not found).
         /// </summary>
         /// <param name="connectionString">Connection string to the database.</param>
         /// <returns>The manager or null if not found.</returns>
-        ISqliteManagerBase FindManagerByConnectionString( string connectionString );
+        ISqliteManagerBase? FindManagerByConnectionString( string connectionString );
     }
 }

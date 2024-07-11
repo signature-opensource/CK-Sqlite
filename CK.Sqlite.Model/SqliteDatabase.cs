@@ -8,18 +8,18 @@ namespace CK.Sqlite
 {
     [Setup( ItemKind = DependentItemKindSpec.Group,
             TrackAmbientProperties = TrackAmbientPropertiesMode.AddPropertyHolderAsChildren,
-            ItemTypeName = "CK.Sqlite.Setup.SqliteDatabaseItem,CK.Sqlite.Setup.Runtime" )]
+            ItemTypeName = "CK.Sqlite.Setup.SqliteDatabaseItem, CK.Sqlite.Engine" )]
     public class SqliteDatabase : ISqliteConnectionStringProvider
     {
         /// <summary>
         /// Default database name is "sqlite": this is the name of the <see cref="SqliteDefaultDatabase"/> type.
         /// </summary>
-        public const string DefaultDatabaseName = SqliteSetupAspectConfiguration.DefaultDatabaseName;
+        public const string DefaultDatabaseName = SqliteAspectConfiguration.DefaultDatabaseName;
         bool _installCore;
 
         public SqliteDatabase( string name )
         {
-            if( String.IsNullOrWhiteSpace( name ) ) throw new ArgumentException( "Must be not null, empty, nor whitespace.", nameof( name ) );
+            Throw.CheckNotNullOrWhiteSpaceArgument( name );
             Name = name;
         }
 

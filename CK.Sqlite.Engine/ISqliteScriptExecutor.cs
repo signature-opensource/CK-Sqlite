@@ -1,7 +1,9 @@
+using CK.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using static CK.Sqlite.SimpleScriptTagHandler;
 
 namespace CK.Sqlite
 {
@@ -33,7 +35,7 @@ namespace CK.Sqlite
         /// <returns>The number of script that failed.</returns>
         public static int Execute( this ISqliteScriptExecutor @this, IEnumerable<string> scripts, bool stopOnError = true )
         {
-            if( scripts == null ) throw new ArgumentNullException( "scripts" );
+            Throw.CheckNotNullArgument( scripts );
             int failCount = 0;
             foreach( string s in scripts )
             {

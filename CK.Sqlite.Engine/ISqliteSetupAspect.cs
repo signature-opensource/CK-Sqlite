@@ -14,7 +14,7 @@ namespace CK.Sqlite.Setup
 
         /// <summary>
         /// Gets the available databases (including the <see cref="DefaultSqliteDatabase"/>).
-        /// It is initialized with <see cref="SqliteSetupAspectConfiguration.Databases"/> content but can be changed.
+        /// It is initialized with <see cref="SqliteAspectConfiguration.Databases"/> content but can be changed.
         /// </summary>
         ISqliteManagerProvider SqliteDatabases { get; }
 

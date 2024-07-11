@@ -15,7 +15,7 @@ namespace CK.Sqlite.Setup
         /// <summary>
         /// Gets the <see cref="SqliteConnection"/> of this <see cref="ISqliteManager"/>.
         /// </summary>
-        SqliteConnection Connection { get; }
+        SqliteConnection? Connection { get; }
 
         /// <summary>
         /// Simple execute scalar helper.
@@ -23,7 +23,7 @@ namespace CK.Sqlite.Setup
         /// </summary>
         /// <param name="select">Select clause.</param>
         /// <returns>The scalar (may be DBNull.Value) or null if no result has been returned.</returns>
-        object ExecuteScalar( string select );
+        object? ExecuteScalar( string select );
 
         /// <summary>
         /// Simple execute helper.
@@ -39,7 +39,7 @@ namespace CK.Sqlite.Setup
         /// </summary>
         /// <param name="cmd">The <see cref="SqlCommand"/> to execute.</param>
         /// <returns>An array of objects or null if nothing has been returned from database.</returns>
-        object[] ReadFirstRow( SqliteCommand cmd );
+        object[]? ReadFirstRow( SqliteCommand cmd );
 
     }
 }

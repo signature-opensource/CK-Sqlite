@@ -9,6 +9,7 @@ using System.Globalization;
 using System.Text.RegularExpressions;
 using System.Reflection;
 using CK.Core;
+using System.Diagnostics.CodeAnalysis;
 
 namespace CK.Sqlite
 {
@@ -23,7 +24,7 @@ namespace CK.Sqlite
         /// </summary>
         /// <param name="s">The starting string.</param>
         /// <returns>An encoded string.</returns>
-        static public string SqliteEncodeStringContent( string s )
+        static public string SqliteEncodeStringContent( string? s )
         {
             return s == null ? string.Empty : s.Replace( "'", "''" );
         }
@@ -42,7 +43,7 @@ namespace CK.Sqlite
         /// real ?. \ can be used directly except when directly followed by *, ? or another \: it must then be duplicated.<br/>
         /// When <paramref name="innerPattern"/> is true, an empty or null string is returned as '%'.
         /// </remarks>
-        static public string SqliteEncodePattern( string s, bool expandWildCards, bool innerPattern )
+        static public string SqliteEncodePattern( string? s, bool expandWildCards, bool innerPattern )
         {
             if( s == null || s.Length == 0 ) return innerPattern ? "%" : String.Empty;
             StringBuilder b = new StringBuilder( s );
@@ -69,12 +70,13 @@ namespace CK.Sqlite
             return b.ToString();
         }
 
-        public static DateTime? ReadDateTimeFromSqliteValue( object value )
+        [return:NotNullIfNotNull( nameof(value))]
+        public static DateTime? ReadDateTimeFromSqliteValue( object? value )
         {
             if( value == null || value == DBNull.Value ) return null; 
             if( value is string stringValue ) return DateTime.ParseExact( stringValue, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal );
             if( value is long longValue ) return DateTime.UnixEpoch + TimeSpan.FromSeconds( longValue );
-            throw new NotSupportedException( $"Could not parse SQLite date with unsupported type {value.GetType().FullName}" );
+            return Throw.NotSupportedException<DateTime>( $"Could not parse SQLite date with unsupported type {value.GetType().FullName}" );
         }
     }
 }
