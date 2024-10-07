@@ -4,24 +4,23 @@ using System.Linq;
 using System.Text;
 using CK.Core;
 
-namespace CK.Sqlite
+namespace CK.Sqlite;
+
+/// <summary>
+/// Typed <see cref="SqliteDatabase"/> for the default <see cref="SqliteDatabase"/>.
+/// </summary>
+public class SqliteDefaultDatabase : SqliteDatabase, IRealObject
 {
     /// <summary>
-    /// Typed <see cref="SqliteDatabase"/> for the default <see cref="SqliteDatabase"/>.
+    /// Initializes the default database. Its name is <see cref="SqliteDatabase.DefaultDatabaseName"/>.
     /// </summary>
-    public class SqliteDefaultDatabase : SqliteDatabase, IRealObject
+    public SqliteDefaultDatabase()
+        : base( DefaultDatabaseName )
     {
-        /// <summary>
-        /// Initializes the default database. Its name is <see cref="SqliteDatabase.DefaultDatabaseName"/>.
-        /// </summary>
-        public SqliteDefaultDatabase()
-            : base( DefaultDatabaseName )
-        {
-        }
+    }
 
-        void StObjConstruct( string connectionString )
-        {
-            ConnectionString = connectionString;
-        }
+    void StObjConstruct( string connectionString )
+    {
+        ConnectionString = connectionString;
     }
 }
