@@ -4,6 +4,7 @@ using FluentAssertions;
 using Microsoft.Data.Sqlite;
 using NUnit.Framework;
 using System;
+using System.Threading.Tasks;
 using static CK.Testing.MonitorTestHelper;
 
 namespace CK.Sqlite.Tests;
@@ -12,7 +13,7 @@ namespace CK.Sqlite.Tests;
 public class SqliteTests
 {
     [Test]
-    public void setup_on_default_AppContext_BaseDirectory_database()
+    public async Task setup_on_default_AppContext_BaseDirectory_database_Async()
     {
         var engineConfiguration = TestHelper.CreateDefaultEngineConfiguration();
         var lite = engineConfiguration.EnsureSqliteConfigurationAspect( connectionString: null );
@@ -20,24 +21,24 @@ public class SqliteTests
 
         using( SqliteConnection conn = new SqliteConnection( lite.DefaultDatabaseConnectionString ) )
         {
-            engineConfiguration.RunSuccessfully();
-            conn.Open();
+            await engineConfiguration.RunSuccessfullyAsync();
+            await conn.OpenAsync();
             TestThatLocalPackagesHaveBeenInstalled( conn );
         }
     }
 
     [Test]
-    public void setup_on_explicit_database_file()
+    public async Task setup_on_explicit_database_file_Async()
     {
         using( var db = new TemporarySqliteDatabase() )
         {
             var engineConfiguration = TestHelper.CreateDefaultEngineConfiguration();
             engineConfiguration.EnsureSqliteConfigurationAspect( db.ConnectionString );
-            engineConfiguration.RunSuccessfully();
+            await engineConfiguration.RunSuccessfullyAsync();
 
             using( SqliteConnection conn = new SqliteConnection( db.ConnectionString ) )
             {
-                conn.Open();
+                await conn.OpenAsync();
                 TestThatLocalPackagesHaveBeenInstalled( conn );
             }
         }
