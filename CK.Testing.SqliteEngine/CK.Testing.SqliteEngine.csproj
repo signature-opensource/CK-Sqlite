@@ -3,7 +3,7 @@
     <TargetFramework>net8.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="CK.Testing.StObjEngine" Version="0.0.0--053iji0-develop" />
+    <PackageReference Include="CK.Testing.StObjEngine" Version="0.0.0--053im6i-develop" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CK.Sqlite.Engine\CK.Sqlite.Engine.csproj" />
