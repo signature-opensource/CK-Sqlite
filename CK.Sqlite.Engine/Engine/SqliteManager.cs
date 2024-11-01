@@ -131,12 +131,12 @@ public class SqliteManager : ISqliteManager
         return _ckCoreInstalled;
     }
 
-    class SqliteExecutor : ISqliteScriptExecutor
+    sealed class SqliteExecutor : ISqliteScriptExecutor
     {
         readonly SqliteManager _manager;
         readonly SqliteCommand _command;
         readonly IActivityMonitor? _monitor;
-        readonly string _databaseName;
+        readonly string? _databaseName;
 
         /// <summary>
         /// Gets or sets the number of <see cref="Execute"/> that failed.
@@ -320,9 +320,6 @@ public class SqliteManager : ISqliteManager
         }
     }
 
-
-    #region Private
-
     void OnConnStateChange( object sender, StateChangeEventArgs args )
     {
         Debug.Assert( _monitor != null );
@@ -330,6 +327,4 @@ public class SqliteManager : ISqliteManager
             _monitor.Info( "Connected to database." );
         else _monitor.Info( "Disconnected from database." );
     }
-
-    #endregion
 }
