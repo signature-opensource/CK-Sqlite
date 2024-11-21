@@ -1,12 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <IsPackable>False</IsPackable>
   </PropertyGroup>
   <ItemGroup>
     <EmbeddedResource Include="**\*.sql" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\CK.Sqlite.Setup.Model\CK.Sqlite.Setup.Model.csproj" />
+    <ProjectReference Include="..\..\CK.Sqlite.Model\CK.Sqlite.Model.csproj" />
   </ItemGroup>
 </Project>

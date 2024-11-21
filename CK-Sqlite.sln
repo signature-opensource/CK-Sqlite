@@ -1,33 +1,30 @@
-
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30320.27
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{67EF8FA0-3642-4EE4-AF94-8B1D66FBCC32}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 		.gitignore = .gitignore
 		appveyor.yml = appveyor.yml
+		Directory.Build.props = Directory.Build.props
 		NuGet.config = NuGet.config
 		RepositoryInfo.xml = RepositoryInfo.xml
-		Directory.Build.props = Directory.Build.props
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CK.Sqlite.Setup.Model", "CK.Sqlite.Setup.Model\CK.Sqlite.Setup.Model.csproj", "{5758A3C9-3259-4A5C-8201-8EB679C8F766}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CK.Sqlite.Model", "CK.Sqlite.Model\CK.Sqlite.Model.csproj", "{5758A3C9-3259-4A5C-8201-8EB679C8F766}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CK.Sqlite.Setup.Runtime", "CK.Sqlite.Setup.Runtime\CK.Sqlite.Setup.Runtime.csproj", "{5223BB58-9460-475D-9FE4-8A23186B688B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CK.Sqlite.Engine", "CK.Sqlite.Engine\CK.Sqlite.Engine.csproj", "{5223BB58-9460-475D-9FE4-8A23186B688B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{E41EE025-81BA-44EC-899A-4B0E1D2190DB}"
-	ProjectSection(SolutionItems) = preProject
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CK.Sqlite.Tests", "Tests\CK.Sqlite.Tests\CK.Sqlite.Tests.csproj", "{87995CBF-EFC2-464E-8BD6-E2977E8FC496}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CK.Testing.SqliteDBSetup", "CK.Testing.SqliteDBSetup\CK.Testing.SqliteDBSetup.csproj", "{FCEB7538-F58F-41DA-9CAB-2C5ADA893F91}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeCakeBuilder", "CodeCakeBuilder\CodeCakeBuilder.csproj", "{ACD6DB7B-FF50-41B5-B107-0A3AE23E66A5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroModel", "Tests\MicroModel\MicroModel.csproj", "{0677D472-DB92-458C-8B5D-BBC318A53901}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicroModel", "Tests\MicroModel\MicroModel.csproj", "{0677D472-DB92-458C-8B5D-BBC318A53901}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CK.Testing.SqliteEngine", "CK.Testing.SqliteEngine\CK.Testing.SqliteEngine.csproj", "{3F746C63-8178-44C2-BF44-EF8248747E67}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,10 +44,6 @@ Global
 		{87995CBF-EFC2-464E-8BD6-E2977E8FC496}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{87995CBF-EFC2-464E-8BD6-E2977E8FC496}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{87995CBF-EFC2-464E-8BD6-E2977E8FC496}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FCEB7538-F58F-41DA-9CAB-2C5ADA893F91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FCEB7538-F58F-41DA-9CAB-2C5ADA893F91}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FCEB7538-F58F-41DA-9CAB-2C5ADA893F91}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FCEB7538-F58F-41DA-9CAB-2C5ADA893F91}.Release|Any CPU.Build.0 = Release|Any CPU
 		{ACD6DB7B-FF50-41B5-B107-0A3AE23E66A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{ACD6DB7B-FF50-41B5-B107-0A3AE23E66A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ACD6DB7B-FF50-41B5-B107-0A3AE23E66A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -59,6 +52,10 @@ Global
 		{0677D472-DB92-458C-8B5D-BBC318A53901}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0677D472-DB92-458C-8B5D-BBC318A53901}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0677D472-DB92-458C-8B5D-BBC318A53901}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F746C63-8178-44C2-BF44-EF8248747E67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F746C63-8178-44C2-BF44-EF8248747E67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F746C63-8178-44C2-BF44-EF8248747E67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F746C63-8178-44C2-BF44-EF8248747E67}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
