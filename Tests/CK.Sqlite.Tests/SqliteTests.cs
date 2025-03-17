@@ -1,6 +1,6 @@
 using CK.Setup;
 using CK.Testing;
-using FluentAssertions;
+using Shouldly;
 using Microsoft.Data.Sqlite;
 using NUnit.Framework;
 using System;
@@ -17,7 +17,7 @@ public class SqliteTests
     {
         var engineConfiguration = TestHelper.CreateDefaultEngineConfiguration();
         var lite = engineConfiguration.EnsureSqliteConfigurationAspect( connectionString: null );
-        lite.IsDefaultDatabaseConnectionStringConfigured.Should().BeFalse( "Using default AppContext.BaseDirectory 'sqlite' database." );
+        lite.IsDefaultDatabaseConnectionStringConfigured.ShouldBeFalse( "Using default AppContext.BaseDirectory 'sqlite' database." );
 
         using( SqliteConnection conn = new SqliteConnection( lite.DefaultDatabaseConnectionString ) )
         {
@@ -54,10 +54,10 @@ public class SqliteTests
         {
             using( var reader = cmd.ExecuteReader() )
             {
-                reader.Read().Should().BeTrue();
-                reader.GetInt32( 0 ).Should().BeGreaterOrEqualTo( 0 );
-                reader.GetString( 1 ).Should().Be( "a" );
-                reader.GetString( 2 ).Should().Be( "b" );
+                reader.Read().ShouldBeTrue();
+                reader.GetInt32( 0 ).ShouldBeGreaterThanOrEqualTo( 0 );
+                reader.GetString( 1 ).ShouldBe( "a" );
+                reader.GetString( 2 ).ShouldBe( "b" );
             }
         }
     }
