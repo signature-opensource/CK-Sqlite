@@ -1,0 +1,16 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path=".gitignore" />
+    <File Path="appveyor.yml" />
+    <File Path="Directory.Build.props" />
+    <File Path="NuGet.config" />
+  </Folder>
+  <Folder Name="/Tests/">
+    <Project Path="Tests/CK.Sqlite.Tests/CK.Sqlite.Tests.csproj" />
+    <Project Path="Tests/MicroModel/MicroModel.csproj" />
+  </Folder>
+  <Project Path="CK.Sqlite.Engine/CK.Sqlite.Engine.csproj" />
+  <Project Path="CK.Sqlite.Model/CK.Sqlite.Model.csproj" />
+  <Project Path="CK.Testing.SqliteEngine/CK.Testing.SqliteEngine.csproj" />
+</Solution>
