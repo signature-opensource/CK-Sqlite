@@ -7,6 +7,6 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Data.SQLite" Version="10.0.12" />
-    <PackageReference Include="CK.Setupable.Model" Version="33.1.0--ci.6" />
+    <PackageReference Include="CK.Setupable.Model" Version="33.1.0--ci.7" />
   </ItemGroup>
 </Project>
