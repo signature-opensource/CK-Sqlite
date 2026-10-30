@@ -7,6 +7,6 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Data.SQLite" Version="10.0.14" />
-    <PackageReference Include="CK.Setupable.Model" Version="36.0.0-0.cris-auth.0.ci.22" />
+    <PackageReference Include="CK.Setupable.Model" Version="36.0.0-0.cris-auth" />
   </ItemGroup>
 </Project>
