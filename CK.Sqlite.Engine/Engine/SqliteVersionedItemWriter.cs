@@ -47,7 +47,7 @@ public class SqliteVersionedItemWriter : IVersionedItemWriter
 
         void Delete( string fullName, bool hasBeenAccessed )
         {
-            if( delete == null ) delete = new StringBuilder( "delete from CKCore.tItemVersionStore where FullName in (" );
+            if( delete == null ) delete = new StringBuilder( "delete from CKCore_tItemVersionStore where FullName in (" );
             else delete.Append( ',' );
             delete.Append( "'" ).Append( SqliteHelper.SqliteEncodeStringContent( fullName ) ).Append( '\'' );
             if( !hasBeenAccessed )
