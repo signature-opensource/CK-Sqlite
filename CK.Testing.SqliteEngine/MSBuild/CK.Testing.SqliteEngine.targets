@@ -1,0 +1,6 @@
+<Project>
+  <Target Name="CK_Testing_SqliteEngine_IsDeprecated" BeforeTargets="ResolveAssemblyReferences">
+    <Error Code="CKDEPRECATED"
+           Text="Package 'CK.Testing.SqliteEngine' is deprecated and must be replaced by 'CK.Testing.Engine.Sqlite': see https://github.com/signature-opensource/CK-Sqlite/blob/stable/CK.Testing.Engine.Sqlite/README.md." />
+  </Target>
+</Project>
