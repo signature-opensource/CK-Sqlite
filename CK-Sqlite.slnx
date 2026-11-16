@@ -12,5 +12,5 @@
   </Folder>
   <Project Path="CK.Sqlite.Engine/CK.Sqlite.Engine.csproj" />
   <Project Path="CK.Sqlite.Model/CK.Sqlite.Model.csproj" />
-  <Project Path="CK.Testing.SqliteEngine/CK.Testing.SqliteEngine.csproj" />
+  <Project Path="CK.Testing.Engine.Sqlite/CK.Testing.Engine.Sqlite.csproj" />
 </Solution>
