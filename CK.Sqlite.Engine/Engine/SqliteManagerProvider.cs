@@ -17,7 +17,7 @@ class SqliteManagerProvider : ISqliteManagerProvider, IDisposable
         public string ConnectionString;
         public ISqliteManager Manager;
 
-        public override string ToString() => $"{Manager != null} - {ConnectionString}";
+        public override string ToString() => $"{Manager != null} - {SqliteManager.RemovePassword( ConnectionString )}";
     }
 
     public SqliteManagerProvider( IActivityMonitor monitor, Action<ISqliteManagerBase> dbConfigurator = null )
@@ -54,7 +54,7 @@ class SqliteManagerProvider : ISqliteManagerProvider, IDisposable
         SqliteManager m = new SqliteManager( _monitor );
         if( !m.OpenFromConnectionString( i.ConnectionString ) )
         {
-            throw new CKException( "Unable to open database for '{0}'.", i.ConnectionString );
+            throw new CKException( "Unable to open database for '{0}'.", SqliteManager.RemovePassword( i.ConnectionString ) );
         }
         _dbConfigurator( m );
         i.Manager = m;

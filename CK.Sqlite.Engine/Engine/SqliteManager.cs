@@ -74,13 +74,33 @@ public class SqliteManager : ISqliteManager
     }
 
     /// <summary>
+    /// Removes the password from a connection string, to write it in a log or in an error message.
+    /// This never throws: an invalid connection string gives the exception type name followed by its message.
+    /// </summary>
+    /// <param name="connectionString">The connection string.</param>
+    /// <returns>The connection string without its password, or an error message.</returns>
+    internal static string RemovePassword( string connectionString )
+    {
+        try
+        {
+            var b = new SqliteConnectionStringBuilder( connectionString );
+            b.Remove( "Password" );
+            return b.ToString();
+        }
+        catch( Exception ex )
+        {
+            return $"{ex.GetType().Name}: {ex.Message}";
+        }
+    }
+
+    /// <summary>
     /// Opens a database from a connection string.
     /// </summary>
     /// <param name="connectionString">The connection string to the database.</param>
     /// <returns>True on success.</returns>
     public bool OpenFromConnectionString( string connectionString )
     {
-        using( _monitor.OpenInfo( $"Connection to {connectionString}." ) )
+        using( _monitor.OpenInfo( $"Connection to {RemovePassword( connectionString )}." ) )
         {
             try
             {

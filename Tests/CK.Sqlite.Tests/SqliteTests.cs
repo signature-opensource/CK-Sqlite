@@ -1,9 +1,11 @@
+using CK.Core;
 using CK.Setup;
 using CK.Testing;
 using Shouldly;
 using Microsoft.Data.Sqlite;
 using NUnit.Framework;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using static CK.Testing.MonitorTestHelper;
 
@@ -62,5 +64,25 @@ public class SqliteTests
         }
     }
 
+    [Test]
+    public async Task a_failed_connection_does_not_log_the_password_of_its_connection_string_Async()
+    {
+        const string password = "S3cret-Marker-Of-The-Test";
+        var engineConfiguration = TestHelper.CreateDefaultEngineConfiguration();
+        // A file in a folder that does not exist: the database cannot be opened.
+        engineConfiguration.EnsureSqliteConfigurationAspect( $"Data Source={TestHelper.TestProjectFolder}/NoSuchFolder/NoSuch.db;Password={password}" );
 
+        using( TestHelper.Monitor.CollectEntries( out var entries, LogLevelFilter.Debug, 100_000 ) )
+        {
+            (await engineConfiguration.RunAsync()).Status.ShouldBe( RunStatus.Failed );
+            // Counts are compared: a failed assertion must not display the entries.
+            var connections = entries.Where( e => e.Text.StartsWith( "Connection to " ) ).ToArray();
+            connections.Length.ShouldBeGreaterThan( 0 );
+            connections.Count( e => e.Text.Contains( password ) ).ShouldBe( 0 );
+            // This error is the exception of the aspect that cannot be created.
+            var unable = entries.Where( e => e.Exception != null && e.Exception.ToString().Contains( "Unable to open database for" ) ).ToArray();
+            unable.Length.ShouldBeGreaterThan( 0 );
+            unable.Count( e => e.Exception!.ToString().Contains( password ) ).ShouldBe( 0 );
+        }
+    }
 }
